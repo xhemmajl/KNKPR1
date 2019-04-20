@@ -1,46 +1,72 @@
 package loginWindow;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class LogIn extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
-		StackPane sPane = new StackPane();
+		primaryStage.setResizable(false);
+		
 		GridPane gridPane = new GridPane();
 		
-		sPane.getChildren().add(gridPane);
 		
-		gridPane.setPadding(new Insets(10,10,10,10));
-		gridPane.setVgap(5);
-		gridPane.setHgap(10);
+		gridPane.setPadding(new Insets(50,50,50,50));
+		gridPane.setVgap(20);
+		gridPane.setHgap(20);
 		
-		Label lblUsername = new Label("Username");
-		Label lblPassword = new Label("Password");
-		Label lblSignup = new Label("Sign Up");
+		Label lblPerdoruesi = new Label("Perdoruesi");
+		Label lblFjalekalimi = new Label("Fjalekalimi");
+		Label lblRegjistrohu = new Label("Regjistrohu");
+		Label lblBookstore = new Label("Book Store");
+		lblBookstore.setFont(Font.font("Times New Roman", 30));
 		
-		TextField tfUsername = new TextField();
-		TextField tfPassword = new TextField();
-		
-		Button btnLogin = new Button("Log In");
-		
-		gridPane.add(lblUsername,0,0);
-		gridPane.add(tfUsername, 0, 1);
-		gridPane.add(lblPassword, 0, 2);
-		gridPane.add(tfPassword, 0, 3);
-		gridPane.add(btnLogin, 0, 4);
+		TextField tfPerdoruesi = new TextField();
+		TextField tfFjalekalimi = new TextField();
+		tfPerdoruesi.setPrefWidth(300);
 		
 		
-		Scene scene = new Scene(sPane, 400,400);
-		primaryStage.setTitle("Log In");
+		CheckBox cbRuajFjalekalimin = new CheckBox("Mbaj mend fjalekalimin");
+		
+		Button btnKyqu = new Button("Kyqu");
+		Button btnAnulo = new Button("Anulo");
+		btnKyqu.setPrefWidth(145);
+		btnAnulo.setPrefWidth(145);
+		
+		Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
+
+		
+		gridPane.add(lblBookstore,1,0);
+		gridPane.add(lblPerdoruesi,0,1);
+		gridPane.add(tfPerdoruesi, 1, 1);
+		gridPane.add(lblFjalekalimi, 0, 2);
+		gridPane.add(tfFjalekalimi, 1, 2);
+		gridPane.add(cbRuajFjalekalimin, 1, 3);
+		gridPane.add(btnKyqu, 1, 4);
+		gridPane.add(btnAnulo, 1, 4);
+		gridPane.add(new Label("Nuk jeni te regjistruar?"), 1, 5);
+		gridPane.add(hlRegjistrohu, 1, 5);
+		
+		gridPane.setHalignment(btnAnulo, HPos.RIGHT);
+		gridPane.setHalignment(hlRegjistrohu,HPos.CENTER);
+		
+		
+		
+		Scene scene = new Scene(gridPane);
+		primaryStage.setTitle("Kyqja");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
