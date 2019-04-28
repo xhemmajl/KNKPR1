@@ -14,8 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import regjistrimi.Regjistrimi;
 
-public class LogIn extends Application{
+public class Kyqja extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -47,7 +48,10 @@ public class LogIn extends Application{
 		btnAnulo.setPrefWidth(145);
 		
 		Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
-
+		hlRegjistrohu.setOnAction(e->{
+			Regjistrimi regjistrimi = new Regjistrimi();
+			regjistrimi.start(primaryStage);
+		});
 		
 		gridPane.add(lblBookstore,1,0);
 		gridPane.add(lblPerdoruesi,0,1);
@@ -68,6 +72,7 @@ public class LogIn extends Application{
 		Scene scene = new Scene(gridPane);
 		primaryStage.setTitle("Kyqja");
 		primaryStage.setScene(scene);
+		primaryStage.centerOnScreen();
 		primaryStage.show();
 		
 	}
