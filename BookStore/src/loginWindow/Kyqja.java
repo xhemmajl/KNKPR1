@@ -3,15 +3,15 @@ package loginWindow;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import regjistrimi.Regjistrimi;
@@ -53,6 +53,10 @@ public class Kyqja extends Application{
 			regjistrimi.start(primaryStage);
 		});
 		
+		HBox hBox = new HBox();
+		hBox.getChildren().addAll(new Label("Nuk jeni te regjistruar?"),hlRegjistrohu);
+		hBox.setAlignment(Pos.CENTER_LEFT);
+		
 		gridPane.add(lblBookstore,1,0);
 		gridPane.add(lblPerdoruesi,0,1);
 		gridPane.add(tfPerdoruesi, 1, 1);
@@ -61,8 +65,7 @@ public class Kyqja extends Application{
 		gridPane.add(cbRuajFjalekalimin, 1, 3);
 		gridPane.add(btnKyqu, 1, 4);
 		gridPane.add(btnAnulo, 1, 4);
-		gridPane.add(new Label("Nuk jeni te regjistruar?"), 1, 5);
-		gridPane.add(hlRegjistrohu, 1, 5);
+		gridPane.add(hBox, 1, 5);
 		
 		gridPane.setHalignment(btnAnulo, HPos.RIGHT);
 		gridPane.setHalignment(hlRegjistrohu,HPos.CENTER);

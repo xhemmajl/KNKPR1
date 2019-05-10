@@ -3,6 +3,7 @@ package regjistrimi;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -83,7 +85,9 @@ public class Regjistrimi extends Application{
 			kyqja.start(primaryStage);
 		});
 		
-		
+		HBox hBox = new HBox();
+		hBox.getChildren().addAll(new Label("Jeni te regjistruar?"),hlKyqu);
+		hBox.setAlignment(Pos.CENTER_LEFT);
 		
 		gPane.add(lblEmri, 0, 0);
 		gPane.add(lblMbiemri, 0, 1);
@@ -112,8 +116,7 @@ public class Regjistrimi extends Application{
 		gPane.add(tfQyteti, 1, 10);
 		gPane.add(btnRegjistrohu, 1, 11);
 		gPane.add(btnAnulo, 1, 11);
-		gPane.add(new Text("Jeni te regjistruar?"), 1, 12);
-		gPane.add(hlKyqu, 1, 12);
+		gPane.add(hBox, 1, 12);
 		
 		gPane.setHalignment(rbMashkull, HPos.LEFT);
 		gPane.setHalignment(rbFemer, HPos.RIGHT);
