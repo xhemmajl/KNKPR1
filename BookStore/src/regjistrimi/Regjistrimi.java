@@ -86,7 +86,12 @@ public class Regjistrimi extends Application{
 		Hyperlink hlKyqu = new Hyperlink("Kyqu");
 		hlKyqu.setOnAction(e->{
 			Kyqja kyqja = new Kyqja();
-			kyqja.start(primaryStage);
+			try {
+				kyqja.start(primaryStage);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		
 		HBox hBox = new HBox();

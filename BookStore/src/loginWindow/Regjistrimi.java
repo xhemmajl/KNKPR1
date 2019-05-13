@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -27,7 +28,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Regjistrimi extends Application{
-	private static Connection dbConnection;
 	
 	private static TextField tfEmri = new TextField();
 	private static TextField tfMbiemri = new TextField();
@@ -44,7 +44,6 @@ public class Regjistrimi extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws ClassNotFoundException {
-		setDbConnection();
 		
 		BorderPane bPane = new BorderPane();
 		StackPane sPane = new StackPane();
@@ -159,26 +158,13 @@ public class Regjistrimi extends Application{
 	Application.launch(args);
 	}
 	
-	public void setDbConnection() throws ClassNotFoundException {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			dbConnection = DriverManager.getConnection("jdbc:mysql://localhost/dbbookstore?useSSL=false","root","045257900");
-		}
-		catch(SQLException ex){
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setHeaderText("Couldn't connected to database!");
-			alert.setContentText(ex.getMessage());
-			alert.showAndWait();
-			System.exit(1);
-		}
-	}
+	
 	
 	private static void insertUser() {
 		String query = "insert into users(firstName,lastName,gender,username,password,telephone,address,city) values (?,?,?,?,?,?,?,?)";
 		
 		try {
-			PreparedStatement pStatement = dbConnection.prepareStatement(query);
+			PreparedStatement pStatement = DatabaseConnection.getConnection().prepareStatement(query);
 			
 			pStatement.setString(1, tfEmri.getText());
 			pStatement.setString(2, tfMbiemri.getText());
@@ -193,9 +179,9 @@ public class Regjistrimi extends Application{
 			Alert infoAlert = new Alert(AlertType.INFORMATION);
 			infoAlert.setTitle("INFO DIALOG");
 			infoAlert.setHeaderText("Jeni regjistruar me sukses!");
+			
 			infoAlert.showAndWait();
-			
-			
+	
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
