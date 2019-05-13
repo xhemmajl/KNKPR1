@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import regjistrimi.Regjistrimi;
@@ -34,7 +35,7 @@ public class Kyqja extends Application{
 		bPane.setCenter(gridPane);
 		
 		
-		gridPane.setPadding(new Insets(60,100,100,100));
+		gridPane.setPadding(new Insets(10,100,100,100));
 		gridPane.setVgap(20);
 		gridPane.setHgap(20);
 		Image imgUsername = new Image("images/username.png");
@@ -88,6 +89,9 @@ public class Kyqja extends Application{
 		
 		gridPane.setHalignment(btnAnulo, HPos.RIGHT);
 		gridPane.setHalignment(hlRegjistrohu,HPos.CENTER);
+		gridPane.setHalignment(lblBookstore, HPos.CENTER);
+		gridPane.setStyle("-fx-background-color:white;");
+		bPane.setStyle("-fx-background-color:white;");
 
 		
 		Scene scene = new Scene(bPane);
