@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -16,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import loginWindow.Kyqja;
 
@@ -58,8 +58,8 @@ public class Regjistrimi extends Application{
 		TextField tfMbiemri = new TextField();
 		TextField tfEmriPerdoruesit = new TextField();
 		TextField tfEmailAdresa = new TextField();
-		TextField tfFjalekalimi = new TextField();
-		TextField tfKonfirmoFjalekalimin = new TextField();
+		PasswordField tfFjalekalimi = new PasswordField();
+		PasswordField tfKonfirmoFjalekalimin = new PasswordField();
 		
 		tfEmri.setPrefWidth(220);
 		
