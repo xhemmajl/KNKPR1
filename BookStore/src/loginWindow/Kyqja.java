@@ -15,12 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import regjistrimi.Regjistrimi;
 
 public class Kyqja extends Application{
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws ClassNotFoundException{
 		primaryStage.setResizable(false);
 		
 		GridPane gridPane = new GridPane();
@@ -51,7 +50,12 @@ public class Kyqja extends Application{
 		Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
 		hlRegjistrohu.setOnAction(e->{
 			Regjistrimi regjistrimi = new Regjistrimi();
-			regjistrimi.start(primaryStage);
+			try {
+				regjistrimi.start(primaryStage);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		});
 		
 		HBox hBox = new HBox();
