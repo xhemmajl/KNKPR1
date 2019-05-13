@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -32,11 +34,13 @@ public class Regjistrimi extends Application{
 		gPane.setVgap(20);
 		
 		bPane.setCenter(gPane);
-		bPane.setTop(sPane);
 		
-		Label lblRegjistrimi = new Label("Regjistrimi i perdoruesve te rinj");
-		lblRegjistrimi.setFont(Font.font("Times New Roman",30));
-		lblRegjistrimi.setPadding(new Insets(15,0,0,0));
+		Image imgSignup = new Image("images/signup.png");
+		ImageView ivSignup = new ImageView(imgSignup);
+		bPane.setTop(ivSignup);
+		bPane.setAlignment(ivSignup, Pos.CENTER);
+
+		
 		
 		Label lblEmri = new Label("Emri:");
 		Label lblMbiemri = new Label("Mbiemri:");
@@ -45,7 +49,7 @@ public class Regjistrimi extends Application{
 		Label lblFjalekalimi = new Label("Fjalekalimi:");
 		Label lblKonfirmoFjalekalimin = new Label("Konfirmo fjalekalimin:");
 		
-		sPane.getChildren().add(lblRegjistrimi);
+	
 		
 		
 		Label lblGjinia = new Label("Gjinia:");
