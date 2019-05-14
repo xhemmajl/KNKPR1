@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
