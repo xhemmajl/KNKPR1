@@ -3,6 +3,7 @@ package main;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -18,9 +19,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -34,15 +35,13 @@ public class Kyqja extends Application{
 	public void start(Stage primaryStage) throws ClassNotFoundException{
 		primaryStage.setResizable(false);
 		
-		BorderPane bPane = new BorderPane();
 		
 		GridPane gridPane = new GridPane();
+		gridPane.setPadding(new Insets(40,50,40,50));
+
+		
 		
 
-		bPane.setCenter(gridPane);
-		
-		
-		gridPane.setPadding(new Insets(10,100,100,100));
 		gridPane.setVgap(20);
 		gridPane.setHgap(20);
 		Image imgUsername = new Image("images/username.png");
@@ -52,8 +51,7 @@ public class Kyqja extends Application{
 		Image imgLogo = new Image("images/logo.png");
 		ImageView ivLogo = new ImageView(imgLogo);
 		
-		bPane.setTop(ivLogo);
-		bPane.setAlignment(ivLogo, Pos.CENTER);
+
 	
 		Label lblRegjistrohu = new Label("Regjistrohu");
 		Label lblBookstore = new Label("Book Store");
@@ -89,13 +87,13 @@ public class Kyqja extends Application{
 		hBox.getChildren().addAll(new Label("Nuk jeni te regjistruar?"),hlRegjistrohu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		
-		
-		gridPane.add(lblBookstore,1,0);
-		gridPane.add(ivUsername,0,1);
-		gridPane.add(tfPerdoruesi, 1, 1);
-		gridPane.add(ivPassword, 0, 2);
-		gridPane.add(tfFjalekalimi, 1, 2);
-		gridPane.add(cbRuajFjalekalimin, 1, 3);
+		gridPane.add(ivLogo, 1, 0);
+		gridPane.add(lblBookstore,1,1);
+		gridPane.add(ivUsername,0,2);
+		gridPane.add(tfPerdoruesi, 1, 2);
+		gridPane.add(ivPassword, 0, 3);
+		gridPane.add(tfFjalekalimi, 1, 3);
+		gridPane.add(cbRuajFjalekalimin, 1, 4);
 		gridPane.add(btnKyqu, 1, 4);
 		gridPane.add(btnAnulo, 1, 4);
 		gridPane.add(hBox, 1, 5);
@@ -104,10 +102,11 @@ public class Kyqja extends Application{
 		gridPane.setHalignment(hlRegjistrohu,HPos.CENTER);
 		gridPane.setHalignment(lblBookstore, HPos.CENTER);
 		gridPane.setStyle("-fx-background-color:white;");
-		bPane.setStyle("-fx-background-color:white;");
+		gridPane.setHalignment(ivLogo, HPos.CENTER);
+	//	vbox.setStyle("-fx-background-color:white;");
 
 		
-		Scene scene = new Scene(bPane);
+		Scene scene = new Scene(gridPane);
 		primaryStage.setTitle("Kyqja");
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();

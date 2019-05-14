@@ -45,21 +45,17 @@ public class Regjistrimi extends Application{
 	@Override
 	public void start(Stage primaryStage) throws ClassNotFoundException {
 		
-		BorderPane bPane = new BorderPane();
-		StackPane sPane = new StackPane();
+
 		
 		GridPane gPane = new GridPane();
-		gPane.setPadding(new Insets(50,50,50,50));
+		gPane.setPadding(new Insets(20,50,50,50));
 		gPane.setHgap(20);
-		gPane.setVgap(20);
+		gPane.setVgap(10);
 		
-		bPane.setCenter(gPane);
-		bPane.setTop(sPane);
-		//
+
 		Image imgSignup = new Image("images/signup.png");
 		ImageView ivSignup = new ImageView(imgSignup);
-		bPane.setTop(ivSignup);
-		bPane.setAlignment(ivSignup, Pos.CENTER);
+
 		
 		Label lblEmri = new Label("Emri:");
 		Label lblMbiemri = new Label("Mbiemri:");
@@ -106,12 +102,13 @@ public class Regjistrimi extends Application{
 		hBox.getChildren().addAll(new Label("Jeni te regjistruar?"),hlKyqu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		
-		gPane.add(lblEmri, 0, 0);
-		gPane.add(lblMbiemri, 0, 1);
-		gPane.add(lblEmriPerdoruesit, 0, 2);
-		gPane.add(lblEmailAdresa, 0, 3);
-		gPane.add(lblFjalekalimi, 0, 4);
-		gPane.add(lblKonfirmoFjalekalimin, 0, 5);
+		gPane.add(ivSignup, 1,0 );
+		gPane.add(lblEmri, 0, 1);
+		gPane.add(lblMbiemri, 0, 2);
+		gPane.add(lblEmriPerdoruesit, 0, 3);
+		gPane.add(lblEmailAdresa, 0, 4);
+		gPane.add(lblFjalekalimi, 0, 5);
+		gPane.add(lblKonfirmoFjalekalimin, 0, 6);
 		//gPane.add(null, 0, 6);
 		gPane.add(lblGjinia, 0, 7);
 		gPane.add(lblTelefoni,0,8);
@@ -119,12 +116,12 @@ public class Regjistrimi extends Application{
 		gPane.add(lblQyteti, 0, 10);
 		
 		
-		gPane.add(tfEmri, 1, 0);
-		gPane.add(tfMbiemri, 1, 1);
-		gPane.add(tfEmriPerdoruesit, 1, 2);
-		gPane.add(tfEmailAdresa, 1, 3);
-		gPane.add(tfFjalekalimi,1,4);
-		gPane.add(tfKonfirmoFjalekalimin,1,5);
+		gPane.add(tfEmri, 1, 1);
+		gPane.add(tfMbiemri, 1, 2);
+		gPane.add(tfEmriPerdoruesit, 1, 3);
+		gPane.add(tfEmailAdresa, 1, 4);
+		gPane.add(tfFjalekalimi,1,5);
+		gPane.add(tfKonfirmoFjalekalimin,1,6);
 		//gPane.add(null, 1, 6);
 		gPane.add(rbMashkull, 1, 7);
 		gPane.add(rbFemer, 1, 7);
@@ -140,11 +137,11 @@ public class Regjistrimi extends Application{
 		gPane.setHalignment(btnRegjistrohu, HPos.LEFT);
 		gPane.setHalignment(btnAnulo, HPos.RIGHT);
 		gPane.setHalignment(hlKyqu, HPos.CENTER);
+		gPane.setHalignment(ivSignup, HPos.CENTER);
 		
 		
 		
-		
-		Scene scene = new Scene(bPane);
+		Scene scene = new Scene(gPane);
 		primaryStage.setTitle("Regjistrimi");
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
