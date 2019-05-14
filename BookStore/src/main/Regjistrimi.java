@@ -56,7 +56,7 @@ public class Regjistrimi extends Application{
 		
 		bPane.setCenter(gPane);
 		bPane.setTop(sPane);
-		
+		//
 		Image imgSignup = new Image("images/signup.png");
 		ImageView ivSignup = new ImageView(imgSignup);
 		bPane.setTop(ivSignup);
