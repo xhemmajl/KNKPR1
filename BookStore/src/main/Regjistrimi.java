@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Regjistrimi extends Application{
-	
+	//
 	private static TextField tfEmri = new TextField();
 	private static TextField tfMbiemri = new TextField();
 	private static TextField tfEmriPerdoruesit = new TextField();
