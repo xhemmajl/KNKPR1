@@ -73,7 +73,7 @@ public class Kyqja extends Application{
 		Button btnAnulo = new Button("Anulo");
 		btnKyqu.setPrefWidth(145);
 		btnAnulo.setPrefWidth(145);
-		
+		//
 		Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
 		hlRegjistrohu.setOnAction(e->{
 			Regjistrimi regjistrimi = new Regjistrimi();
