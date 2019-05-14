@@ -151,6 +151,7 @@ public class Kyqja extends Application{
 		tfPerdoruesi.setText("");
 		tfFjalekalimi.setText("");
 	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

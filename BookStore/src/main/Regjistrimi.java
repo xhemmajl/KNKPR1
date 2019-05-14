@@ -29,18 +29,22 @@ import javafx.stage.Stage;
 
 public class Regjistrimi extends Application{
 	//
-	private static TextField tfEmri = new TextField();
-	private static TextField tfMbiemri = new TextField();
-	private static TextField tfEmriPerdoruesit = new TextField();
-	private static TextField tfEmailAdresa = new TextField();
-	private static PasswordField tfFjalekalimi = new PasswordField();
-	private static PasswordField tfKonfirmoFjalekalimin = new PasswordField();
-	private static TextField tfTelefoni = new TextField();
-	private static TextField tfAdresa = new TextField();
-	private static TextField tfQyteti = new TextField();
-	private static ToggleGroup tgGjinia = new ToggleGroup();
-	private static RadioButton rbMashkull = new RadioButton("Mashkull");
-	private static RadioButton rbFemer = new RadioButton("Femer");
+	private TextField tfEmri = new TextField();
+	private TextField tfMbiemri = new TextField();
+	private TextField tfEmriPerdoruesit = new TextField();
+	private TextField tfEmailAdresa = new TextField();
+	private PasswordField tfFjalekalimi = new PasswordField();
+	private PasswordField tfKonfirmoFjalekalimin = new PasswordField();
+	private TextField tfTelefoni = new TextField();
+	private TextField tfAdresa = new TextField();
+	private TextField tfQyteti = new TextField();
+	private ToggleGroup tgGjinia = new ToggleGroup();
+	private RadioButton rbMashkull = new RadioButton("Mashkull");
+	private RadioButton rbFemer = new RadioButton("Femer");
+	
+	private static Stage secondStage;
+	private Kyqja kyqja = new Kyqja();
+
 	
 	@Override
 	public void start(Stage primaryStage) throws ClassNotFoundException {
@@ -84,12 +88,12 @@ public class Regjistrimi extends Application{
 		btnRegjistrohu.setOnAction(e->insertUser());
 		
 		Button btnAnulo = new Button("Anulo");
+		btnAnulo.setOnAction(e->clearForm());
 		btnRegjistrohu.setPrefWidth(105);
 		btnAnulo.setPrefWidth(105);
 		
 		Hyperlink hlKyqu = new Hyperlink("Kyqu");
 		hlKyqu.setOnAction(e->{
-			Kyqja kyqja = new Kyqja();
 			try {
 				kyqja.start(primaryStage);
 			} catch (ClassNotFoundException e1) {
@@ -149,21 +153,23 @@ public class Regjistrimi extends Application{
 		
 	}
 	
-	public static void main(String[] args) {
-	Application.launch(args);
-	}
-	
-	
-	
-	private static void insertUser() {
+	// INSERT USER TO DATABASE
+	private void insertUser(){
 		String query = "insert into users(firstName,lastName,gender,username,password,telephone,address,city) values (?,?,?,?,?,?,?,?)";
 		
 		try {
 			PreparedStatement pStatement = DatabaseConnection.getConnection().prepareStatement(query);
 			
+			String gjinia = null;
+			if(rbMashkull.isSelected())
+				gjinia = "M";
+			else if(rbFemer.isSelected())
+				gjinia = "F";
+			
+			
 			pStatement.setString(1, tfEmri.getText());
 			pStatement.setString(2, tfMbiemri.getText());
-			pStatement.setString(3, rbMashkull.isSelected()? "M":"F");
+			pStatement.setString(3, gjinia);
 			pStatement.setString(4, tfEmriPerdoruesit.getText());
 			pStatement.setString(5, tfFjalekalimi.getText());
 			pStatement.setString(6, tfTelefoni.getText());
@@ -174,9 +180,8 @@ public class Regjistrimi extends Application{
 			Alert infoAlert = new Alert(AlertType.INFORMATION);
 			infoAlert.setTitle("INFO DIALOG");
 			infoAlert.setHeaderText("Jeni regjistruar me sukses!");
-			
 			infoAlert.showAndWait();
-	
+			clearForm();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -185,8 +190,27 @@ public class Regjistrimi extends Application{
 			alert.setHeaderText("Something went wrong!Cannot insert student in database!");
 			alert.setContentText(e.getMessage());
 			alert.showAndWait();
-			System.exit(1);
+			clearForm();
 		}
 		
+	}
+	
+	// CLEAR FORM
+	private void clearForm() {
+		tfEmri.setText("");
+		tfMbiemri.setText("");
+		tfEmriPerdoruesit.setText("");
+		tfEmailAdresa.setText("");
+		tfFjalekalimi.setText("");
+		tfKonfirmoFjalekalimin.setText("");
+		tfTelefoni.setText("");
+		tfAdresa.setText("");
+		tfQyteti.setText("");
+		tgGjinia.selectToggle(null);
+		
+	}
+	
+	public static void main(String[] args) {
+	Application.launch(args);
 	}
 }
