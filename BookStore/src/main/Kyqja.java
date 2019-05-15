@@ -94,9 +94,9 @@ public class Kyqja extends Application{
 		gridPane.add(ivPassword, 0, 3);
 		gridPane.add(tfFjalekalimi, 1, 3);
 		gridPane.add(cbRuajFjalekalimin, 1, 4);
-		gridPane.add(btnKyqu, 1, 4);
-		gridPane.add(btnAnulo, 1, 4);
-		gridPane.add(hBox, 1, 5);
+		gridPane.add(btnKyqu, 1, 5);
+		gridPane.add(btnAnulo, 1, 5);
+		gridPane.add(hBox, 1, 6);
 		
 		gridPane.setHalignment(btnAnulo, HPos.RIGHT);
 		gridPane.setHalignment(hlRegjistrohu,HPos.CENTER);

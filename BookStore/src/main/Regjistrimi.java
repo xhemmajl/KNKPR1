@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.RenderingHints.Key;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -85,7 +88,17 @@ public class Regjistrimi extends Application{
 
 		
 		Button btnRegjistrohu = new Button("Regjistrohu");
-		btnRegjistrohu.setOnAction(e->insertUser());
+		btnRegjistrohu.setOnAction(e->{
+			if(validate())
+				insertUser();
+		});
+		
+		btnRegjistrohu.setOnKeyReleased(e->{
+			if(e.getCode() == KeyCode.ENTER)
+				if(validate())
+					insertUser();
+		});
+		
 		
 		Button btnAnulo = new Button("Anulo");
 		btnAnulo.setOnAction(e->clearForm());
@@ -105,6 +118,16 @@ public class Regjistrimi extends Application{
 		HBox hBox = new HBox();
 		hBox.getChildren().addAll(new Label("Jeni te regjistruar?"),hlKyqu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
+		
+		
+//		tfEmri.setOnKeyReleased(e->{
+//			char keyChar = e.getCode().toString().charAt(0);
+//			if(!Character.isAlphabetic(keyChar)) {
+//				e.consume();
+//				//Toolkit.getDefaultToolkit().beep();
+//			}
+//				
+//		});
 		
 		gPane.add(ivSignup, 1,0 );
 		gPane.add(lblEmri, 0, 1);
@@ -208,6 +231,13 @@ public class Regjistrimi extends Application{
 		tfQyteti.setText("");
 		tgGjinia.selectToggle(null);
 		
+	}
+	
+	public boolean validate() {
+		
+		
+		
+		return true;
 	}
 	
 	public static void main(String[] args) {

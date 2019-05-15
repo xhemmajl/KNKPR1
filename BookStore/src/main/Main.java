@@ -43,21 +43,24 @@ public class Main extends Application{
 		//search icon
 		Image imgSearch = new Image("images/search.png");
 		ImageView ivSearch = new ImageView(imgSearch);
+		Button btnSearch = new Button("",ivSearch);
+		btnSearch.setPrefSize(30, 30);
 		
 		
 		ivSearch.setOnMouseClicked(e -> {
 			//a searching engine for books...
 		});
 		
-		HBox hbox = new HBox();
+		HBox hbox = new HBox(20);
 		
 		//Textfield for book search
 		TextField searchTxt = new TextField();
+		searchTxt.setPrefHeight(32);
 		
 		searchTxt.setMaxWidth(150);
 		searchTxt.setPromptText("Kerko Librin");
-		searchTxt.setStyle("-fx-background-color: #b3c3b4;");
-		
+		//searchTxt.setStyle("-fx-background-color: red;");
+		//#b3c3b4
 		
 		searchTxt.setFont(Font.font("Times New Roman", 15));
 		searchTxt.setOnKeyPressed(e -> {
@@ -66,16 +69,18 @@ public class Main extends Application{
 			}
 		});
 		
-		hbox.getChildren().addAll(searchTxt,ivSearch);
+		hbox.getChildren().addAll(searchTxt,btnSearch);
 		
 		borderPane.setTop(hbox);
 		hbox.setAlignment(Pos.CENTER);
+		
 		
 		BorderPane.setMargin(hbox, new Insets(30,0,0,0));
 		
 		
 		
-		Scene scene = new Scene(borderPane,1200,800);
+		Scene scene = new Scene(borderPane);
+		primaryStage.setMaximized(true);
 		primaryStage.setTitle("Shit-blerje e librave Online");
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
