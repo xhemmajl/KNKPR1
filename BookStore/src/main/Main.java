@@ -40,6 +40,7 @@ public class Main extends Application{
 		BorderPane borderPane = new BorderPane();
 		borderPane.setPadding(new Insets(15,15,15,15));
 		
+		//search icon
 		Image imgSearch = new Image("images/search.png");
 		ImageView ivSearch = new ImageView(imgSearch);
 		
