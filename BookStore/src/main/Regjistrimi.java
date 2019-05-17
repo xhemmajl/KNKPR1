@@ -5,8 +5,10 @@ import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +25,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -120,7 +123,7 @@ public class Regjistrimi extends Application{
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		
 		
-//		tfEmri.setOnKeyReleased(e->{
+//		tfEmri.setOnInputMethodTextChanged(e->{
 //			char keyChar = e.getCode().toString().charAt(0);
 //			if(!Character.isAlphabetic(keyChar)) {
 //				e.consume();
@@ -178,7 +181,7 @@ public class Regjistrimi extends Application{
 	
 	// INSERT USER TO DATABASE
 	private void insertUser(){
-		String query = "insert into users(firstName,lastName,gender,username,password,telephone,address,city) values (?,?,?,?,?,?,?,?)";
+		String query = "insert into users(firstName,lastName,gender,username,password,telephone,address,city,email) values (?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			PreparedStatement pStatement = DatabaseConnection.getConnection().prepareStatement(query);
@@ -189,15 +192,21 @@ public class Regjistrimi extends Application{
 			else if(rbFemer.isSelected())
 				gjinia = "F";
 			
+			String emri = tfEmri.getText();
+			emri = emri.substring(0,1).toUpperCase() + emri.substring(1);
 			
-			pStatement.setString(1, tfEmri.getText());
-			pStatement.setString(2, tfMbiemri.getText());
+			String mbiemri = tfMbiemri.getText();
+			mbiemri = mbiemri.substring(0,1).toUpperCase() + mbiemri.substring(1);
+			
+			pStatement.setString(1, emri);
+			pStatement.setString(2, mbiemri);
 			pStatement.setString(3, gjinia);
 			pStatement.setString(4, tfEmriPerdoruesit.getText());
 			pStatement.setString(5, tfFjalekalimi.getText());
 			pStatement.setString(6, tfTelefoni.getText());
 			pStatement.setString(7, tfAdresa.getText());
 			pStatement.setString(8, tfQyteti.getText());
+			pStatement.setString(9, tfEmailAdresa.getText());
 			
 			pStatement.executeUpdate();
 			Alert infoAlert = new Alert(AlertType.INFORMATION);
@@ -235,10 +244,136 @@ public class Regjistrimi extends Application{
 	
 	public boolean validate() {
 		
+		if(validoEmrin() && validoMbiemrin() && validoEmrinPerdoruesit()
+				&& validoEmailin() && validoFjalekalimin() && validoTelefonin())
+			return true;
+		else return false;
 		
-		
-		return true;
 	}
+	
+	public boolean validoEmrin() {
+		char[] charEmri = tfEmri.getText().toCharArray();
+		int count = 0;
+		for(int i =0;i<charEmri.length;i++)
+			if(Character.isAlphabetic(charEmri[i])==false) {
+				tfEmri.setStyle("-fx-background-color:red;");
+				
+				count++;
+			} else 
+				tfEmri.setStyle("");
+		
+		if(count>0)
+			return false;
+		else
+			return true;
+	}
+	
+	public boolean validoMbiemrin() {
+		char[] charMbiemri = tfMbiemri.getText().toCharArray();
+		int count = 0;
+		for(int i =0;i<charMbiemri.length;i++)
+			if(Character.isAlphabetic(charMbiemri[i])==false) {
+				tfMbiemri.setStyle("-fx-background-color:red;");
+				
+				count++;
+			} else
+				tfMbiemri.setStyle("");
+		
+		if(count>0)
+			return false;
+		else
+			return true;
+	}
+	
+	public boolean validoEmrinPerdoruesit() {
+		String userPattern = "^[a-z0-9_-]{6,20}$";
+		
+		String query = "select username from users where username = ?";
+		try {
+			PreparedStatement preparedStm = DatabaseConnection.getConnection().prepareStatement(query);
+			preparedStm.setString(1, tfEmriPerdoruesit.getText());
+			
+			ResultSet rs = preparedStm.executeQuery();
+			
+			if(rs.next()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Ky emer '"+tfEmriPerdoruesit.getText()+"' eshte i regjistruar!\nJu lutem zgjedhni nje emer tjeter.");
+				alert.showAndWait();
+				return false;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(tfEmriPerdoruesit.getText().matches(userPattern)) {
+			tfEmriPerdoruesit.setStyle("");
+			return true;
+		}
+		else {
+			tfEmriPerdoruesit.setStyle("-fx-background-color:red;");
+			return false;
+		}
+	}
+	
+	public boolean validoEmailin() {
+		String emailPattern = "[a-zA-Z0-9._]{1,20}@[a-zA-Z]{1,10}[.]{1}[a-zA-Z]{2,3}";
+		if(tfEmailAdresa.getText().matches(emailPattern)) {
+			tfEmailAdresa.setStyle("");
+			return true;
+		}
+		else {
+			tfEmailAdresa.setStyle("-fx-background-color: red;");
+			return false;
+		}
+		
+	}
+	
+	public boolean validoFjalekalimin() {
+		String fjalekalimi1 = tfFjalekalimi.getText();
+		String fjalekalimi2 = tfKonfirmoFjalekalimin.getText();
+		
+		
+		if(tfFjalekalimi.getText().length()<8) {
+			tfFjalekalimi.setStyle("-fx-background-color: red;");
+			return false;
+		}else if(fjalekalimi1.equals(fjalekalimi2)) {
+			tfFjalekalimi.setStyle("");
+			tfKonfirmoFjalekalimin.setStyle("");
+			return true;
+		} else if(!fjalekalimi1.equals(fjalekalimi2)){
+			tfFjalekalimi.setStyle("-fx-background-color: red;");
+			tfKonfirmoFjalekalimin.setStyle("-fx-background-color: red;");
+			return false;
+		}else {
+			tfFjalekalimi.setStyle("");
+			return true;
+		}
+		
+	}
+	
+	public boolean validoTelefonin() {
+		char[] charNumri = tfTelefoni.getText().toCharArray();
+		int count = 0;
+		for(int i=0; i<charNumri.length;i++) 
+			if(Character.isAlphabetic(charNumri[i]))
+				count++;
+
+
+		
+		if(count>0) {
+			tfTelefoni.setStyle("-fx-background-color: red;");
+			return false;}
+		else {
+			tfTelefoni.setStyle("");
+			return true;
+		}
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 	Application.launch(args);
