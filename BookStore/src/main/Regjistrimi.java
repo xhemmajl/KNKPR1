@@ -94,8 +94,15 @@ public class Regjistrimi extends Application{
 		
 		Button btnRegjistrohu = new Button("Regjistrohu");
 		btnRegjistrohu.setOnAction(e->{
-			if(validate())
+			if(validate()) {
 				insertUser();
+				try {
+					kyqja.start(primaryStage);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		});
 		
 		btnRegjistrohu.setOnKeyReleased(e->{

@@ -80,7 +80,14 @@ public class Kyqja extends Application{
 			}
 		});
 		
-		btnKyqu.setOnAction(e->kyqu());
+		Main main = new Main();
+		Stage mainStage = new Stage();
+		btnKyqu.setOnAction(e->{
+			if(kyqu()) {
+				main.start(mainStage);
+				primaryStage.close();
+			}
+		});
 		btnAnulo.setOnAction(e->anulo());
 		
 		HBox hBox = new HBox();
@@ -114,16 +121,18 @@ public class Kyqja extends Application{
 		
 	}
 	
-	public void kyqu() {
+	public boolean kyqu() {
 		if(isPasswordCorrect()) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setContentText("Jeni kyqur me sukses!");
 			alert.showAndWait();
+			return true;
 		}
 		else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setContentText("Perdoruesi ose fjalekalimi jane gabim!");
 			alert.showAndWait();
+			return false;
 		}
 	}
 	
