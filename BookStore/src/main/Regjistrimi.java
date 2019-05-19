@@ -50,6 +50,8 @@ public class Regjistrimi extends Application{
 	
 	private static Stage secondStage;
 	private Kyqja kyqja = new Kyqja();
+	
+	private String css = "-fx-background-color:red;";
 
 	
 	@Override
@@ -245,7 +247,8 @@ public class Regjistrimi extends Application{
 	public boolean validate() {
 		
 		if(validoEmrin() && validoMbiemrin() && validoEmrinPerdoruesit()
-				&& validoEmailin() && validoFjalekalimin() && validoTelefonin())
+				&& validoEmailin() && validoFjalekalimin() && validoTelefonin()
+				&& validoAdresen() && validoQytetin() && validoGjinine())
 			return true;
 		else return false;
 		
@@ -255,34 +258,34 @@ public class Regjistrimi extends Application{
 		char[] charEmri = tfEmri.getText().toCharArray();
 		int count = 0;
 		for(int i =0;i<charEmri.length;i++)
-			if(Character.isAlphabetic(charEmri[i])==false) {
-				tfEmri.setStyle("-fx-background-color:red;");
-				
+			if(Character.isAlphabetic(charEmri[i])==false)				
 				count++;
-			} else 
-				tfEmri.setStyle("");
-		
-		if(count>0)
+
+		if(count>0 || tfEmri.getText().length()<3) {
+			tfEmri.setStyle("-fx-background-color:red;");
 			return false;
-		else
+		}
+		else {
+			tfEmri.setStyle("");
 			return true;
+		}
 	}
 	
 	public boolean validoMbiemrin() {
 		char[] charMbiemri = tfMbiemri.getText().toCharArray();
 		int count = 0;
 		for(int i =0;i<charMbiemri.length;i++)
-			if(Character.isAlphabetic(charMbiemri[i])==false) {
-				tfMbiemri.setStyle("-fx-background-color:red;");
-				
+			if(Character.isAlphabetic(charMbiemri[i])==false) 
 				count++;
-			} else
-				tfMbiemri.setStyle("");
 		
-		if(count>0)
+		if(count>0 || tfMbiemri.getText().length()<4) {
+			tfMbiemri.setStyle("-fx-background-color:red;");
 			return false;
-		else
+		}
+		else {
+			tfMbiemri.setStyle("");
 			return true;
+		}
 	}
 	
 	public boolean validoEmrinPerdoruesit() {
@@ -363,7 +366,7 @@ public class Regjistrimi extends Application{
 
 
 		
-		if(count>0) {
+		if(count>0 || tfTelefoni.getText().length()<9) {
 			tfTelefoni.setStyle("-fx-background-color: red;");
 			return false;}
 		else {
@@ -371,6 +374,42 @@ public class Regjistrimi extends Application{
 			return true;
 		}
 	}
+	
+	public boolean validoAdresen() {
+		if(tfAdresa.getText().length()<6) {
+			tfAdresa.setStyle(css);
+			return false;
+		}
+		else {
+			tfAdresa.setStyle("");
+			return true;
+		}
+	}
+	
+	public boolean validoQytetin() {
+		if(tfQyteti.getText().length()<2) {
+			tfQyteti.setStyle(css);
+			return false;
+		}
+		else {
+			tfQyteti.setStyle("");
+			return true;
+		}
+	}
+	
+	public boolean validoGjinine() {
+		if(!rbMashkull.isSelected() && !rbFemer.isSelected()) {
+			rbMashkull.setStyle(css);
+			rbFemer.setStyle(css);
+			return false;
+		}
+		else {
+			rbMashkull.setStyle("");
+			rbFemer.setStyle("");
+			return true;
+		}
+	}
+	
 	
 	
 	
