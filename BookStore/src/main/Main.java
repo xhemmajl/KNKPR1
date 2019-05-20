@@ -33,40 +33,71 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-	
-	
 	@Override
 	public void start(Stage primaryStage) {
-		HBox hbox1 = new HBox(10);
-		hbox1.setAlignment(Pos.TOP_CENTER);
-		Label bookStore = new Label("Book Store");
-		TextField search = new TextField();
+		VBox vBoxMain = new VBox();
+		
+		String btnStyle = "-fx-background-color:rgb(228,0,70);";
+		Font btnFont = Font.font("Times New Roman",FontWeight.BOLD,15);
+		
+		HBox hBox1 = new HBox(170);
+		hBox1.setPadding(new Insets(25,25,25,25));
+		hBox1.setStyle("-fx-background-color:rgb(228,0,70);");
+		
+		
+		Label lblBookstore = new Label("BookStore");
+		lblBookstore.setFont(Font.font("Sans-serif",FontWeight.BOLD,20));
+		lblBookstore.setTextFill(Color.WHITE);
+		
+		TextField tfKerko = new TextField();
+		tfKerko.setPrefWidth(450);
+		tfKerko.setPrefHeight(35);
+		
 		Button btnKerko = new Button("Kerko");
-		Button btnShitjet = new Button("Shitjet");
-		Button btnBlerjet = new Button("Blerjet");
-		Button btnShkyqu = new Button("Shkyqu");
-		hbox1.getChildren().addAll(bookStore,search,btnKerko,btnShitjet,btnBlerjet,btnShkyqu);
-		hbox1.setStyle("-fx-background-color:#E40046;");
-		hbox1.setPrefHeight(50);
-		hbox1.setPadding(new Insets(20,20,20,20));
-		search.setPrefSize(50, 50);
-		search.setPromptText("Kerko Libra...");
-		bookStore.setAlignment(Pos.BASELINE_LEFT);
-		VBox vbox1 = new VBox();
-		vbox1.getChildren().add(hbox1);
-		//vbox1.setPadding(new Insets(20,20,20,20));
-		search.setPrefWidth(500);
-		bookStore.setFont(Font.font("Times new Roman",FontWeight.BOLD,30));
-		
+		btnKerko.setStyle("-fx-background-color:rgb(51,51,51);");
 		btnKerko.setTextFill(Color.WHITE);
-		btnKerko.setStyle("-fx-background-color:#E40046;");
+		btnKerko.setPrefSize(100, 35);
+		btnKerko.setFont(btnFont);
 		
+		Button btnShitjet = new Button("Shitjet");
+		btnShitjet.setStyle(btnStyle);
+		btnShitjet.setTextFill(Color.WHITE);
+		btnShitjet.setPrefSize(100, 30);
+		btnShitjet.setFont(btnFont);
+
+
 		
-		Scene scene = new Scene(vbox1,1400,700);
-		primaryStage.setTitle("Shit-blerje e librave Online");
+		Button btnBlerjet = new Button("Blerjet");
+		btnBlerjet.setStyle(btnStyle);
+		btnBlerjet.setTextFill(Color.WHITE);
+		btnBlerjet.setPrefSize(100, 30);
+		btnBlerjet.setFont(btnFont);
+
+
+		
+		Button btnShkyqu = new Button("Shkyqu");
+		btnShkyqu.setStyle(btnStyle);
+		btnShkyqu.setTextFill(Color.WHITE);
+		btnShkyqu.setPrefSize(100, 30);
+		btnShkyqu.setFont(btnFont);
+
+
+		
+		HBox hBoxButonat = new HBox(5);
+		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu);
+		hBoxButonat.setStyle("-fx-background-color:rgb(228,0,70);");
+		
+		HBox hBoxKerko = new HBox();
+		hBoxKerko.getChildren().addAll(tfKerko,btnKerko);
+		
+		hBox1.getChildren().addAll(lblBookstore,hBoxKerko, hBoxButonat);				
+		
+		vBoxMain.getChildren().addAll(hBox1);
+		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
-		primaryStage.centerOnScreen();
+		primaryStage.setMaximized(true);
 		primaryStage.show();
+		
 	}
 	public static void main(String[] args) {
 		Application.launch(args);
