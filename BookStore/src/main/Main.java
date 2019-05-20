@@ -1,6 +1,7 @@
 package main;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -29,9 +30,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-	public static void main(String[] args) {
-		Application.launch(args);
-	}
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -39,39 +38,12 @@ public class Main extends Application{
 		
 		BorderPane borderPane = new BorderPane();
 		borderPane.setPadding(new Insets(15,15,15,15));
-		
+		borderPane.setStyle("-fx-background-image:url(images/book.jpg);-fx-background-repeat:no-repeat;-fx-background-position:center;-fx-height:100%; -fx-width:100%; -fx-background-size:cover;");
 		//search icon
-		Image imgSearch = new Image("images/search.png");
-		ImageView ivSearch = new ImageView(imgSearch);
-		Button btnSearch = new Button("",ivSearch);
-		btnSearch.setPrefSize(30, 30);
-		
-		
-		ivSearch.setOnMouseClicked(e -> {
-			//a searching engine for books...
-		});
 		
 		HBox hbox = new HBox(20);
 		
-		//Textfield for book search
-		TextField searchTxt = new TextField();
-		searchTxt.setPrefHeight(32);
 		
-		searchTxt.setMaxWidth(150);
-		searchTxt.setPromptText("Kerko Librin");
-		//searchTxt.setStyle("-fx-background-color: red;");
-		//#b3c3b4
-		
-		searchTxt.setFont(Font.font("Times New Roman", 15));
-		searchTxt.setOnKeyPressed(e -> {
-			if(e.getCode() == KeyCode.ENTER) {
-				//a searching engine for books...
-			}
-		});
-		
-		hbox.getChildren().addAll(searchTxt,btnSearch);
-		
-		borderPane.setTop(hbox);
 		hbox.setAlignment(Pos.CENTER);
 		
 		
@@ -85,6 +57,9 @@ public class Main extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
+	}
+	public static void main(String[] args) {
+		Application.launch(args);
 	}
 	
 
