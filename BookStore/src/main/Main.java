@@ -26,7 +26,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -34,25 +37,32 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) {
+		HBox hbox1 = new HBox(10);
+		hbox1.setAlignment(Pos.TOP_CENTER);
+		Label bookStore = new Label("Book Store");
+		TextField search = new TextField();
+		Button btnKerko = new Button("Kerko");
+		Button btnShitjet = new Button("Shitjet");
+		Button btnBlerjet = new Button("Blerjet");
+		Button btnShkyqu = new Button("Shkyqu");
+		hbox1.getChildren().addAll(bookStore,search,btnKerko,btnShitjet,btnBlerjet,btnShkyqu);
+		hbox1.setStyle("-fx-background-color:#E40046;");
+		hbox1.setPrefHeight(50);
+		hbox1.setPadding(new Insets(20,20,20,20));
+		search.setPrefSize(50, 50);
+		search.setPromptText("Kerko Libra...");
+		bookStore.setAlignment(Pos.BASELINE_LEFT);
+		VBox vbox1 = new VBox();
+		vbox1.getChildren().add(hbox1);
+		//vbox1.setPadding(new Insets(20,20,20,20));
+		search.setPrefWidth(500);
+		bookStore.setFont(Font.font("Times new Roman",FontWeight.BOLD,30));
+		
+		btnKerko.setTextFill(Color.WHITE);
+		btnKerko.setStyle("-fx-background-color:#E40046;");
 		
 		
-		BorderPane borderPane = new BorderPane();
-		borderPane.setPadding(new Insets(15,15,15,15));
-		borderPane.setStyle("-fx-background-image:url(images/book.jpg);-fx-background-repeat:no-repeat;-fx-background-position:center;-fx-height:100%; -fx-width:100%; -fx-background-size:cover;");
-		//search icon
-		
-		HBox hbox = new HBox(20);
-		
-		
-		hbox.setAlignment(Pos.CENTER);
-		
-		
-		BorderPane.setMargin(hbox, new Insets(30,0,0,0));
-		
-		
-		
-		Scene scene = new Scene(borderPane);
-		primaryStage.setMaximized(true);
+		Scene scene = new Scene(vbox1,1400,700);
 		primaryStage.setTitle("Shit-blerje e librave Online");
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
