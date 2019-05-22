@@ -1,7 +1,6 @@
 package main;
 
 import java.sql.Connection;
-
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -32,6 +31,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
@@ -100,6 +100,9 @@ public class Main extends Application{
 		
 		VBox vb = new VBox(); //per hiperlinkat
 		
+		Label lblZgjedh = new Label("Zgjedh librin");
+		
+		
 		Hyperlink hpBook1 = new Hyperlink("Poezi");
 		Hyperlink hpBook2 = new Hyperlink("Romane");
 		Hyperlink hpBook3 = new Hyperlink("Shkencor");
@@ -112,21 +115,20 @@ public class Main extends Application{
 		Hyperlink hpBook10 = new Hyperlink("Religjion");
 		Hyperlink hpBook11 = new Hyperlink("Fantazi");
 		
-		hpBook1.setFont(Font.font("monospace",30));
-		hpBook2.setFont(Font.font("monospace",30));
-		hpBook3.setFont(Font.font("monospace",30));
-		hpBook4.setFont(Font.font("monospace",30));
-		hpBook5.setFont(Font.font("monospace",30));
-		hpBook6.setFont(Font.font("monospace",30));
-		hpBook7.setFont(Font.font("monospace",30));
-		hpBook8.setFont(Font.font("monospace",30));
-		hpBook9.setFont(Font.font("monospace",30));
-		hpBook10.setFont(Font.font("monospace",30));
-		hpBook11.setFont(Font.font("monospace",30));
-		
-		
-		
-		vb.getChildren().addAll(hpBook1,hpBook2,hpBook3,
+		lblZgjedh.setFont(Font.font("Times New Roman", FontPosture.ITALIC, 30));
+		hpBook1.setFont(Font.font("monospace",25));
+		hpBook2.setFont(Font.font("monospace",25));
+		hpBook3.setFont(Font.font("monospace",25));
+		hpBook4.setFont(Font.font("monospace",25));
+		hpBook5.setFont(Font.font("monospace",25));
+		hpBook6.setFont(Font.font("monospace",25));
+		hpBook7.setFont(Font.font("monospace",25));
+		hpBook8.setFont(Font.font("monospace",25));
+		hpBook9.setFont(Font.font("monospace",25));
+		hpBook10.setFont(Font.font("monospace",25));
+		hpBook11.setFont(Font.font("monospace",25));
+				
+		vb.getChildren().addAll(lblZgjedh,hpBook1,hpBook2,hpBook3,
 				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8,
 				hpBook9,hpBook10,hpBook11);
 		
@@ -142,22 +144,19 @@ public class Main extends Application{
 		hpBook9.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook10.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook11.setStyle("-fx-text-fill: #f7cfd7;");
-		
-		
+		lblZgjedh.setStyle("-fx-text-fill: #d39e17;");
+		lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
+			
 		
 		vb.setMaxWidth(300);
 		vb.setAlignment(Pos.CENTER);
-		vb.setPadding(new Insets(20,20,20,20));
 		
-		vb.setSpacing(-5);
+		
+		vb.setSpacing(-15);
 		VBox.setMargin(vb, new Insets(20,20,20,40));
 		
-		
-		
-		
-		
-		
-		vBoxMain.getChildren().add(vb); //veq per test <-
+				
+		vBoxMain.getChildren().add(vb); 
 		
 		
 		
