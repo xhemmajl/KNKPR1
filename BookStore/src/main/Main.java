@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,6 +18,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -93,6 +96,73 @@ public class Main extends Application{
 		hBox1.getChildren().addAll(lblBookstore,hBoxKerko, hBoxButonat);				
 		
 		vBoxMain.getChildren().addAll(hBox1);
+		
+		
+		VBox vb = new VBox(); //per hiperlinkat
+		
+		Hyperlink hpBook1 = new Hyperlink("Poezi");
+		Hyperlink hpBook2 = new Hyperlink("Romane");
+		Hyperlink hpBook3 = new Hyperlink("Shkencor");
+		Hyperlink hpBook4 = new Hyperlink("Per Femij");
+		Hyperlink hpBook5 = new Hyperlink("Ekonomik");
+		Hyperlink hpBook6 = new Hyperlink("Biografik");
+		Hyperlink hpBook7 = new Hyperlink("Per nxenes");
+		Hyperlink hpBook8 = new Hyperlink("Komedi");
+		Hyperlink hpBook9 = new Hyperlink("Mjeksi");
+		Hyperlink hpBook10 = new Hyperlink("Religjion");
+		Hyperlink hpBook11 = new Hyperlink("Fantazi");
+		
+		hpBook1.setFont(Font.font("monospace",30));
+		hpBook2.setFont(Font.font("monospace",30));
+		hpBook3.setFont(Font.font("monospace",30));
+		hpBook4.setFont(Font.font("monospace",30));
+		hpBook5.setFont(Font.font("monospace",30));
+		hpBook6.setFont(Font.font("monospace",30));
+		hpBook7.setFont(Font.font("monospace",30));
+		hpBook8.setFont(Font.font("monospace",30));
+		hpBook9.setFont(Font.font("monospace",30));
+		hpBook10.setFont(Font.font("monospace",30));
+		hpBook11.setFont(Font.font("monospace",30));
+		
+		
+		
+		vb.getChildren().addAll(hpBook1,hpBook2,hpBook3,
+				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8,
+				hpBook9,hpBook10,hpBook11);
+		
+		vb.setStyle(" -fx-background-color: linear-gradient(to top left, #bdc3c7, #2c3e50);"); //me gjet naj ngjyr tmir
+		hpBook1.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook2.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook3.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook4.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook5.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook6.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook7.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook8.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook9.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook10.setStyle("-fx-text-fill: #f7cfd7;");
+		hpBook11.setStyle("-fx-text-fill: #f7cfd7;");
+		
+		
+		
+		vb.setMaxWidth(300);
+		vb.setAlignment(Pos.CENTER);
+		vb.setPadding(new Insets(20,20,20,20));
+		
+		vb.setSpacing(-5);
+		VBox.setMargin(vb, new Insets(20,20,20,40));
+		
+		
+		
+		
+		
+		
+		vBoxMain.getChildren().add(vb); //veq per test <-
+		
+		
+		
+		
+		
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);
