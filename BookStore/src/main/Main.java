@@ -132,7 +132,7 @@ public class Main extends Application{
 				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8,
 				hpBook9,hpBook10,hpBook11);
 		
-		vb.setStyle(" -fx-background-color: linear-gradient(to top left, #bdc3c7, #2c3e50);"); //me gjet naj ngjyr tmir
+		vb.setStyle(" -fx-background-color: linear-gradient(to top left, #cb2d3e, #ef473a);"); //me gjet naj ngjyr tmir
 		hpBook1.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook2.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook3.setStyle("-fx-text-fill: #f7cfd7;");
