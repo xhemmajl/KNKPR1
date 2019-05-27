@@ -162,9 +162,10 @@ public class Main extends Application{
 		
 		
 		
-		Scene scene = new Scene(vBoxMain);
+		Scene scene = new Scene(vBoxMain,1500,700);
 		primaryStage.setScene(scene);
-		primaryStage.setMaximized(true);
+		primaryStage.setMaximized(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		
 	}
