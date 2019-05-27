@@ -98,7 +98,7 @@ public class Main extends Application{
 		vBoxMain.getChildren().addAll(hBox1);
 		
 		
-		VBox vb = new VBox(); //per hiperlinkat
+		VBox vbKategorite = new VBox(); //per hiperlinkat
 		
 		Label lblZgjedh = new Label("Zgjedh librin");
 		
@@ -128,11 +128,11 @@ public class Main extends Application{
 		hpBook10.setFont(Font.font("monospace",25));
 		hpBook11.setFont(Font.font("monospace",25));
 				
-		vb.getChildren().addAll(lblZgjedh,hpBook1,hpBook2,hpBook3,
+		vbKategorite.getChildren().addAll(lblZgjedh,hpBook1,hpBook2,hpBook3,
 				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8,
 				hpBook9,hpBook10,hpBook11);
 		
-		vb.setStyle(" -fx-background-color: linear-gradient(to top left, #cb2d3e, #ef473a);"); //me gjet naj ngjyr tmir
+		vbKategorite.setStyle(" -fx-background-color: linear-gradient(to top left, #cb2d3e, #ef473a);"); //me gjet naj ngjyr tmir
 		hpBook1.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook2.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook3.setStyle("-fx-text-fill: #f7cfd7;");
@@ -148,15 +148,15 @@ public class Main extends Application{
 		lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
 			
 		
-		vb.setMaxWidth(300);
-		vb.setAlignment(Pos.CENTER);
+		vbKategorite.setMaxWidth(300);
+		vbKategorite.setAlignment(Pos.CENTER);
 		
 		
-		vb.setSpacing(-15);
-		VBox.setMargin(vb, new Insets(20,20,20,40));
+		vbKategorite.setSpacing(-15);
+		VBox.setMargin(vbKategorite, new Insets(20,20,20,40));
 		
 				
-		vBoxMain.getChildren().add(vb); 
+		vBoxMain.getChildren().add(vbKategorite); 
 		
 		
 		
