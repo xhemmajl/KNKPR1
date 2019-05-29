@@ -1,31 +1,18 @@
 package main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.List;
+
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,12 +25,12 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
-		VBox vBoxMain = new VBox();
+		VBox vBoxMain = new VBox(20);
 		
 		String btnStyle = "-fx-background-color:rgb(228,0,70);";
 		Font btnFont = Font.font("Times New Roman",FontWeight.BOLD,15);
 		
-		HBox hBox1 = new HBox(170);
+		HBox hBox1 = new HBox(130);
 		hBox1.setPadding(new Insets(25,25,25,25));
 		hBox1.setStyle("-fx-background-color:rgb(228,0,70);");
 		
@@ -140,14 +127,14 @@ public class Main extends Application{
 		hpBook8.setStyle("-fx-text-fill: #f7cfd7;");
 
 		lblZgjedh.setStyle("-fx-text-fill: #d39e17;");
-		lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
+		//lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
 			
 		
 		//vbKategorite.setMaxWidth(250);
 		vbKategorite.setAlignment(Pos.CENTER);
 		
-		//vbKategorite.setSpacing(-15);
-		VBox.setMargin(vbKategorite, new Insets(20,20,20,40));
+		//  vbKategorite.setSpacing(-15);
+		//	VBox.setMargin(vbKategorite, new Insets(20,20,10,40));
 		
 		// slideshow
 		Image imgTimeline = new Image("images/timeline.jpg");
@@ -157,25 +144,48 @@ public class Main extends Application{
 		ivTimeline.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 		
 		
-		
-		
-			
 		hbTimeline.getChildren().add(vbKategorite);
 		hbTimeline.getChildren().add(ivTimeline);
-		hbTimeline.setPadding(new Insets(20,20,20,30));
-		
+		//hbTimeline.setPadding(new Insets(20,20,20,30));
 		
 		vBoxMain.getChildren().add(hbTimeline);
+		
+		// books
+		HBox hbBooks = new HBox(15);
+		
+		List<Book> books = Book.getBooks();
+		BookPane[] bookPane = new BookPane[5];
+		for(int i=0;i<5;i++) {
+			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+			hbBooks.getChildren().add(bookPane[i]);
+		}
+		
+		StackPane sellPane = new StackPane();
+		sellPane.setStyle("-fx-background-color:white;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+		
+		
+		ImageView ivPlus = new ImageView(new Image("images/PLUS.png"));
+		ivPlus.setFitHeight(67);
+		ivPlus.setFitWidth(69);
+		Button btnSell = new Button("",ivPlus);
+		btnSell.setStyle("-fx-background-color:white;");
+		sellPane.getChildren().add(btnSell);
+		sellPane.setPrefWidth(400);
+		
+		hbBooks.getChildren().add(sellPane);
+		
+		
+		vBoxMain.getChildren().add(hbBooks);
+		
+		vBoxMain.setPadding(new Insets(10,15,10,15));
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
 		primaryStage.setMaximized(true);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		
 	}
+	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
-	
-
 }
