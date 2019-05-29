@@ -97,42 +97,39 @@ public class Main extends Application{
 		
 		vBoxMain.getChildren().addAll(hBox1);
 		
+		// Pjesa nen header
+		HBox hbTimeline = new HBox(30);
 		
 		VBox vbKategorite = new VBox(); //per hiperlinkat
+		vbKategorite.setPadding(new Insets(20,60,20,60));
 		
-		Label lblZgjedh = new Label("Zgjedh librin");
+		Label lblZgjedh = new Label("Kategorite");
 		
 		
 		Hyperlink hpBook1 = new Hyperlink("Poezi");
 		Hyperlink hpBook2 = new Hyperlink("Romane");
 		Hyperlink hpBook3 = new Hyperlink("Shkencor");
 		Hyperlink hpBook4 = new Hyperlink("Per Femij");
-		Hyperlink hpBook5 = new Hyperlink("Ekonomik");
-		Hyperlink hpBook6 = new Hyperlink("Biografik");
-		Hyperlink hpBook7 = new Hyperlink("Per nxenes");
-		Hyperlink hpBook8 = new Hyperlink("Komedi");
-		Hyperlink hpBook9 = new Hyperlink("Mjeksi");
-		Hyperlink hpBook10 = new Hyperlink("Religjion");
-		Hyperlink hpBook11 = new Hyperlink("Fantazi");
+		Hyperlink hpBook5 = new Hyperlink("Biografik");
+		Hyperlink hpBook6 = new Hyperlink("Per nxenes");
+		Hyperlink hpBook7 = new Hyperlink("Komedi");
+		Hyperlink hpBook8 = new Hyperlink("Fantazi");
 		
-		lblZgjedh.setFont(Font.font("Times New Roman", FontPosture.ITALIC, 30));
-		hpBook1.setFont(Font.font("monospace",25));
-		hpBook2.setFont(Font.font("monospace",25));
-		hpBook3.setFont(Font.font("monospace",25));
-		hpBook4.setFont(Font.font("monospace",25));
-		hpBook5.setFont(Font.font("monospace",25));
-		hpBook6.setFont(Font.font("monospace",25));
-		hpBook7.setFont(Font.font("monospace",25));
-		hpBook8.setFont(Font.font("monospace",25));
-		hpBook9.setFont(Font.font("monospace",25));
-		hpBook10.setFont(Font.font("monospace",25));
-		hpBook11.setFont(Font.font("monospace",25));
+		lblZgjedh.setFont(Font.font("Times New Roman", FontPosture.ITALIC, 25));
+		hpBook1.setFont(Font.font("monospace",17));
+		hpBook2.setFont(Font.font("monospace",17));
+		hpBook3.setFont(Font.font("monospace",17));
+		hpBook4.setFont(Font.font("monospace",17));
+		hpBook5.setFont(Font.font("monospace",17));
+		hpBook6.setFont(Font.font("monospace",17));
+		hpBook7.setFont(Font.font("monospace",17));
+		hpBook8.setFont(Font.font("monospace",17));
+
 				
 		vbKategorite.getChildren().addAll(lblZgjedh,hpBook1,hpBook2,hpBook3,
-				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8,
-				hpBook9,hpBook10,hpBook11);
+				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8);
 		
-		vbKategorite.setStyle(" -fx-background-color: linear-gradient(to top left, #cb2d3e, #ef473a);"); //me gjet naj ngjyr tmir
+		vbKategorite.setStyle(" -fx-background-color: linear-gradient(to top left, #cb2d3e, #ef473a);-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);"); //me gjet naj ngjyr tmir
 		hpBook1.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook2.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook3.setStyle("-fx-text-fill: #f7cfd7;");
@@ -141,30 +138,37 @@ public class Main extends Application{
 		hpBook6.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook7.setStyle("-fx-text-fill: #f7cfd7;");
 		hpBook8.setStyle("-fx-text-fill: #f7cfd7;");
-		hpBook9.setStyle("-fx-text-fill: #f7cfd7;");
-		hpBook10.setStyle("-fx-text-fill: #f7cfd7;");
-		hpBook11.setStyle("-fx-text-fill: #f7cfd7;");
+
 		lblZgjedh.setStyle("-fx-text-fill: #d39e17;");
 		lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
 			
 		
-		vbKategorite.setMaxWidth(300);
+		//vbKategorite.setMaxWidth(250);
 		vbKategorite.setAlignment(Pos.CENTER);
 		
-		
-		vbKategorite.setSpacing(-15);
+		//vbKategorite.setSpacing(-15);
 		VBox.setMargin(vbKategorite, new Insets(20,20,20,40));
 		
-				
-		vBoxMain.getChildren().add(vbKategorite); 
+		// slideshow
+		Image imgTimeline = new Image("images/timeline.jpg");
+		ImageView ivTimeline = new ImageView(imgTimeline);
+		ivTimeline.setFitWidth(1000);
+		ivTimeline.setFitHeight(350);
+		ivTimeline.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 		
 		
 		
 		
+			
+		hbTimeline.getChildren().add(vbKategorite);
+		hbTimeline.getChildren().add(ivTimeline);
+		hbTimeline.setPadding(new Insets(20,20,20,30));
 		
-		Scene scene = new Scene(vBoxMain,1500,700);
+		
+		vBoxMain.getChildren().add(hbTimeline);
+		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
-		primaryStage.setMaximized(false);
+		primaryStage.setMaximized(true);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 		
