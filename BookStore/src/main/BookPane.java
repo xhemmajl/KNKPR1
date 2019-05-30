@@ -58,10 +58,14 @@ public class BookPane extends FlowPane{
 		lblPrice.setText(String.valueOf(price));
 		
 		GridPane gPane = new GridPane();
-		gPane.addRow(0, new Label("Autori: "),lblAuthor);
-		gPane.addRow(1, new Label("Kategoria: "),lblGenre);
-		gPane.addRow(2, new Label("Viti: "),lblPublicationYear);	
-		gPane.addRow(3, new Label("Cmimi: "),lblPrice);
+		Label authorlb = new Label("Autori :");
+		Label kategorilb = new Label("Kategoria :");
+		Label vitilb = new Label("Viti: ");
+		Label cmimilb = new Label("Cmimi: ");
+		gPane.addRow(0,authorlb,lblAuthor);
+		gPane.addRow(1,kategorilb,lblGenre);
+		gPane.addRow(2, vitilb,lblPublicationYear);	
+		gPane.addRow(3, cmimilb,lblPrice);
 		getChildren().addAll(lblTitle,gPane,btnBlej);
 
 
