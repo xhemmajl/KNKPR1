@@ -120,6 +120,27 @@ public class Book{
 		
 		return books;
 	}
+	
+	public static List<Book> getBooks(String query){
+		List<Book> books = new ArrayList();
+		
+		
+		try {
+			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Book book = new Book(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getInt(5),resultSet.getDouble(6));
+				books.add(book);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			
+		}
+		
+		return books;
+	}
 
 
 }

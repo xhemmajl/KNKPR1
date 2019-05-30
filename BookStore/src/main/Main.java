@@ -6,10 +6,12 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -23,6 +25,9 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 public class Main extends Application{
+	TextField tfKerko = new TextField();
+
+	
 	@Override
 	public void start(Stage primaryStage) {
 		VBox vBoxMain = new VBox(20);
@@ -39,7 +44,6 @@ public class Main extends Application{
 		lblBookstore.setFont(Font.font("Sans-serif",FontWeight.BOLD,20));
 		lblBookstore.setTextFill(Color.WHITE);
 		
-		TextField tfKerko = new TextField();
 		tfKerko.setPrefWidth(450);
 		tfKerko.setPrefHeight(35);
 		
@@ -48,6 +52,43 @@ public class Main extends Application{
 		btnKerko.setTextFill(Color.WHITE);
 		btnKerko.setPrefSize(100, 35);
 		btnKerko.setFont(btnFont);
+		
+		btnKerko.setOnAction(e->{
+			if(tfKerko.getText().length()>4) {
+			
+			Stage searchStage = new Stage();
+			HBox hbBooksSearched = new HBox(15);
+
+			Scene bookSearchedScene = new Scene(hbBooksSearched);
+			searchStage.setScene(bookSearchedScene);
+			
+			String strBook = tfKerko.getText();
+			String query = "SELECT * FROM Book WHERE title LIKE '%"+strBook+"%'";
+			
+			hbBooksSearched.setPadding(new Insets(15,15,15,15));
+			
+			List<Book> books = Book.getBooks(query);
+			BookPane[] bookPane = new BookPane[books.size()];
+			
+			if(books.isEmpty()) {
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur!");
+				alert.setContentText("Ky liber nuk ekziston!");
+				alert.showAndWait();
+
+			}
+			else {
+			for(int i=0;i<bookPane.length;i++) {
+				bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+				hbBooksSearched.getChildren().add(bookPane[i]);
+				searchStage.show();
+
+				}
+			}
+
+			}
+		});
 		
 		Button btnShitjet = new Button("Shitjet");
 		btnShitjet.setStyle(btnStyle);
