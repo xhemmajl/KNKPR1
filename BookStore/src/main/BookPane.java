@@ -38,10 +38,10 @@ public class BookPane extends FlowPane{
 		lblTitle.setAlignment(Pos.TOP_CENTER);
 		
 		btnBlej.setAlignment(Pos.BOTTOM_CENTER);
-<<<<<<< HEAD
+
 		btnBlej.setCursor(Cursor.HAND);
 		
-=======
+
 		btnBlej.setStyle("-fx-background-color: \r\n" + 
 				"        linear-gradient(#ffd65b, #e68400),\r\n" + 
 				"        linear-gradient(#ffef84, #f2ba44),\r\n" + 
@@ -54,7 +54,7 @@ public class BookPane extends FlowPane{
 				"    -fx-font-weight: bold;\r\n" + 
 				"    -fx-font-size: 14px;\r\n" + 
 				"    -fx-padding: 10 20 10 20;");
->>>>>>> 204c5a8de3f224a6a8e35b0b2e2e200961e3fd20
+
 		lblTitle.setFont(lblFont);
 		
 		lblTitle.setText(title);
