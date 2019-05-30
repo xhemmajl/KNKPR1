@@ -3,6 +3,7 @@ package main;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -37,6 +38,7 @@ public class BookPane extends FlowPane{
 		lblTitle.setAlignment(Pos.TOP_CENTER);
 		
 		btnBlej.setAlignment(Pos.BOTTOM_CENTER);
+		btnBlej.setCursor(Cursor.HAND);
 		
 		lblTitle.setFont(lblFont);
 		

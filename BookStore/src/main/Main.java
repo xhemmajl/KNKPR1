@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -49,11 +50,21 @@ public class Main extends Application{
 		btnKerko.setPrefSize(100, 35);
 		btnKerko.setFont(btnFont);
 		
+		btnKerko.setOnMouseEntered(e->{
+			btnKerko.setCursor(Cursor.HAND);
+		});
+		
+	
+		
 		Button btnShitjet = new Button("Shitjet");
 		btnShitjet.setStyle(btnStyle);
 		btnShitjet.setTextFill(Color.WHITE);
 		btnShitjet.setPrefSize(100, 30);
 		btnShitjet.setFont(btnFont);
+		
+		btnShitjet.setOnMouseEntered(e->{
+			btnShitjet.setCursor(Cursor.HAND);
+		});
 
 
 		
@@ -63,6 +74,9 @@ public class Main extends Application{
 		btnBlerjet.setPrefSize(100, 30);
 		btnBlerjet.setFont(btnFont);
 
+		btnBlerjet.setOnMouseEntered(e->{
+			btnBlerjet.setCursor(Cursor.HAND);
+		});
 
 		
 		Button btnShkyqu = new Button("Shkyqu");
@@ -71,7 +85,9 @@ public class Main extends Application{
 		btnShkyqu.setPrefSize(100, 30);
 		btnShkyqu.setFont(btnFont);
 
-
+		btnShkyqu.setOnMouseEntered(e->{
+			btnShkyqu.setCursor(Cursor.HAND);
+		});
 		
 		HBox hBoxButonat = new HBox(5);
 		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu);
@@ -167,8 +183,14 @@ public class Main extends Application{
 		ImageView ivPlus = new ImageView(new Image("images/PLUS.png"));
 		ivPlus.setFitHeight(67);
 		ivPlus.setFitWidth(69);
+		
+		
 		Button btnSell = new Button("",ivPlus);
 		btnSell.setStyle("-fx-background-color:white;");
+		
+		btnSell.setOnMouseEntered(e->{
+			btnSell.setCursor(Cursor.HAND);
+		});
 		sellPane.getChildren().add(btnSell);
 		sellPane.setPrefWidth(400);
 		
