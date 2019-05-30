@@ -102,6 +102,10 @@ public class Main extends Application{
 		Hyperlink hpBook7 = new Hyperlink("Komedi");
 		Hyperlink hpBook8 = new Hyperlink("Fantazi");
 		
+		hpBook1.setOnAction(e->{
+			
+		});
+		
 		lblZgjedh.setFont(Font.font("Times New Roman", FontPosture.ITALIC, 25));
 		hpBook1.setFont(Font.font("monospace",17));
 		hpBook2.setFont(Font.font("monospace",17));
