@@ -38,8 +38,23 @@ public class BookPane extends FlowPane{
 		lblTitle.setAlignment(Pos.TOP_CENTER);
 		
 		btnBlej.setAlignment(Pos.BOTTOM_CENTER);
+<<<<<<< HEAD
 		btnBlej.setCursor(Cursor.HAND);
 		
+=======
+		btnBlej.setStyle("-fx-background-color: \r\n" + 
+				"        linear-gradient(#ffd65b, #e68400),\r\n" + 
+				"        linear-gradient(#ffef84, #f2ba44),\r\n" + 
+				"        linear-gradient(#ffea6a, #efaa22),\r\n" + 
+				"        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\r\n" + 
+				"        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));\r\n" + 
+				"    -fx-background-radius: 30;\r\n" + 
+				"    -fx-background-insets: 0,1,2,3,0;\r\n" + 
+				"    -fx-text-fill: #654b00;\r\n" + 
+				"    -fx-font-weight: bold;\r\n" + 
+				"    -fx-font-size: 14px;\r\n" + 
+				"    -fx-padding: 10 20 10 20;");
+>>>>>>> 204c5a8de3f224a6a8e35b0b2e2e200961e3fd20
 		lblTitle.setFont(lblFont);
 		
 		lblTitle.setText(title);
@@ -49,10 +64,14 @@ public class BookPane extends FlowPane{
 		lblPrice.setText(String.valueOf(price));
 		
 		GridPane gPane = new GridPane();
-		gPane.addRow(0, new Label("Autori: "),lblAuthor);
-		gPane.addRow(1, new Label("Kategoria: "),lblGenre);
-		gPane.addRow(2, new Label("Viti: "),lblPublicationYear);	
-		gPane.addRow(3, new Label("Cmimi: "),lblPrice);
+		Label authorlb = new Label("Autori :");
+		Label kategorilb = new Label("Kategoria :");
+		Label vitilb = new Label("Viti: ");
+		Label cmimilb = new Label("Cmimi: ");
+		gPane.addRow(0,authorlb,lblAuthor);
+		gPane.addRow(1,kategorilb,lblGenre);
+		gPane.addRow(2, vitilb,lblPublicationYear);	
+		gPane.addRow(3, cmimilb,lblPrice);
 		getChildren().addAll(lblTitle,gPane,btnBlej);
 
 
