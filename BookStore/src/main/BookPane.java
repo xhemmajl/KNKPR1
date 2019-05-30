@@ -28,7 +28,7 @@ public class BookPane extends FlowPane{
 		setAlignment(Pos.CENTER);
 		setPadding(new Insets(10,10,0,10));
 		setVgap(30);
-		setStyle("-fx-background-color: pink;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
+		setStyle("-fx-background-color: linear-gradient(to top left, #FAE3E3, #ef473a);-fx-effect: dropshadow(three-pass-box, rgba(0,0,10,0.8), 10, 0, 0, 0);");
 		setMargin(this, new Insets(10,20,20,10));
 		setWidth(200);
 		lblTitle.setPrefWidth(200);
@@ -38,6 +38,18 @@ public class BookPane extends FlowPane{
 		lblTitle.setAlignment(Pos.TOP_CENTER);
 		
 		btnBlej.setAlignment(Pos.BOTTOM_CENTER);
+		btnBlej.setStyle("-fx-background-color: \r\n" + 
+				"        linear-gradient(#ffd65b, #e68400),\r\n" + 
+				"        linear-gradient(#ffef84, #f2ba44),\r\n" + 
+				"        linear-gradient(#ffea6a, #efaa22),\r\n" + 
+				"        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\r\n" + 
+				"        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));\r\n" + 
+				"    -fx-background-radius: 30;\r\n" + 
+				"    -fx-background-insets: 0,1,2,3,0;\r\n" + 
+				"    -fx-text-fill: #654b00;\r\n" + 
+				"    -fx-font-weight: bold;\r\n" + 
+				"    -fx-font-size: 14px;\r\n" + 
+				"    -fx-padding: 10 20 10 20;");
 
 		btnBlej.setCursor(Cursor.HAND);
 		
