@@ -74,6 +74,16 @@ public class BookPane extends FlowPane{
 		lblGenre.setText(genre);
 		lblPublicationYear.setText(String.valueOf(publicationYear));
 		lblPrice.setText(String.valueOf(price));
+		lblTitle.setFont(Font.font("Lucida Sans Unicode",FontWeight.BOLD,20));
+		lblTitle.setStyle("-fx-text-fill:#350303;");
+		lblAuthor.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		lblAuthor.setStyle("-fx-text-fill:#350303;");
+		lblGenre.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		lblGenre.setStyle("-fx-text-fill:#350303;");
+		lblPublicationYear.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		lblPublicationYear.setStyle("-fx-text-fill:#350303;");
+		lblPrice.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		lblPrice.setStyle("-fx-text-fill:#350303;");
 		
 		GridPane gPane = new GridPane();
 		Label authorlb = new Label("Autori :");
