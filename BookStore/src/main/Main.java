@@ -83,9 +83,9 @@ public class Main extends Application{
 			for(int i=0;i<bookPane.length;i++) {
 				bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
 				hbBooksSearched.getChildren().add(bookPane[i]);
-				searchStage.show();
-
 				}
+			searchStage.show();
+
 			}
 
 			}
@@ -245,7 +245,7 @@ public class Main extends Application{
 		vBoxMain.setPadding(new Insets(10,15,10,15));
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
-		primaryStage.setMaximized(true);
+		//primaryStage.setMaximized(true);
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
