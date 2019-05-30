@@ -90,6 +90,14 @@ public class BookPane extends FlowPane{
 		Label kategorilb = new Label("Kategoria :");
 		Label vitilb = new Label("Viti: ");
 		Label cmimilb = new Label("Cmimi: ");
+		authorlb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		authorlb.setStyle("-fx-text-fill:#350303;");
+		kategorilb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		kategorilb.setStyle("-fx-text-fill:#350303;");
+		vitilb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		vitilb.setStyle("-fx-text-fill:#350303;");
+		cmimilb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
+		cmimilb.setStyle("-fx-text-fill:#350303;");
 		gPane.addRow(0,authorlb,lblAuthor);
 		gPane.addRow(1,kategorilb,lblGenre);
 		gPane.addRow(2, vitilb,lblPublicationYear);	
