@@ -8,14 +8,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -234,6 +234,77 @@ public class Main extends Application{
 		btnSell.setOnMouseEntered(e->{
 			btnSell.setCursor(Cursor.HAND);
 		});
+		
+		btnSell.setOnAction(e->{
+			Stage sellStage = new Stage();
+			
+			GridPane gridSellPane = new GridPane();
+			gridSellPane.setPadding(new Insets(15,15,15,15));
+			gridSellPane.setVgap(5);
+			gridSellPane.setHgap(10);
+			gridSellPane.setStyle("-fx-background-color: linear-gradient(to top left, #FAE3E3, #ef473a);-fx-effect: dropshadow(three-pass-box, rgba(0,0,10,0.8), 10, 0, 0, 0);");
+
+			
+			
+			Label lblSellTitulli = new Label("Titulli: ");
+			Label lblSellAutori = new Label("Autori: ");
+			Label lblSellKategoria = new Label("Kategoria: ");
+			Label lblSellViti = new Label("Viti: ");
+			Label lblSellCmimi = new Label("Cmimi: ");
+			
+			TextField tfSellTitulli = new TextField();
+			TextField tfSellAutori = new TextField();
+			TextField tfSellKategoria = new TextField();
+			TextField tfSellViti = new TextField();
+			TextField tfSellCmimi = new TextField();
+			
+			Button btnSell1 = new Button("Publiko librin");
+			btnSell1.setStyle("-fx-background-color: \r\n" + 
+					"        linear-gradient(#ffd65b, #e68400),\r\n" + 
+					"        linear-gradient(#ffef84, #f2ba44),\r\n" + 
+					"        linear-gradient(#ffea6a, #efaa22),\r\n" + 
+					"        linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),\r\n" + 
+					"        linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));\r\n" + 
+					"    -fx-background-radius: 30;\r\n" + 
+					"    -fx-background-insets: 0,1,2,3,0;\r\n" + 
+					"    -fx-text-fill: #654b00;\r\n" + 
+					"    -fx-font-weight: bold;\r\n" + 
+					"    -fx-font-size: 14px;\r\n" + 
+					"    -fx-padding: 10 20 10 20;");
+			btnSell1.setCursor(Cursor.HAND);
+			btnSell1.setOnAction(e1->{
+				if(Book.insertBook(tfSellTitulli.getText(), tfSellAutori.getText(), tfSellKategoria.getText(), tfSellViti.getText(), Double.parseDouble(tfSellCmimi.getText()))) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setHeaderText("Publikimi perfundoi me sukses!");
+					alert.setContentText("Libri juaj eshte ne shitje!");
+					alert.showAndWait();
+					sellStage.close();
+					primaryStage.show();
+				}
+				else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setHeaderText("Publikimi NUK perfundoi me sukses!");
+					alert.setContentText("Libri juaj NUK eshte ne shitje!");
+					alert.showAndWait();
+				}
+			});
+			
+			gridSellPane.addRow(0, lblSellTitulli,tfSellTitulli);
+			gridSellPane.addRow(1, lblSellAutori,tfSellAutori);
+			gridSellPane.addRow(2, lblSellKategoria,tfSellKategoria);
+			gridSellPane.addRow(3, lblSellViti,tfSellViti);
+			gridSellPane.addRow(4, lblSellCmimi,tfSellCmimi);
+			gridSellPane.add(btnSell1,1,5);
+			
+			
+			Scene sellScene = new Scene(gridSellPane);
+			
+			sellStage.setScene(sellScene);
+			sellStage.show();
+			
+		});
+		
+		
 		sellPane.getChildren().add(btnSell);
 		sellPane.setPrefWidth(400);
 		

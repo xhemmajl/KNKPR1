@@ -88,7 +88,7 @@ public class Book{
 			preparedStatement.setString(2, author);
 			preparedStatement.setString(3, genre);
 			preparedStatement.setString(4, publicationYear);
-			preparedStatement.setDouble(4, price);
+			preparedStatement.setDouble(5, price);
 			
 			return (preparedStatement.executeUpdate()>0);
 		} catch(SQLException ex) {
@@ -102,7 +102,7 @@ public class Book{
 	public static List<Book> getBooks(){
 		List<Book> books = new ArrayList();
 		
-		String query = "SELECT * FROM book";
+		String query = "SELECT * FROM book ORDER BY bookID desc";
 		
 		try {
 			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);

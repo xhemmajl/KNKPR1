@@ -26,9 +26,11 @@ INSERT INTO Book(title,author,genre,publication_year,price)  VALUES('Princesha A
 INSERT INTO Book(title,author,genre,publication_year,price)  VALUES('Ca pika shiu rane mbi qele','Ismajl Kadare','Poezi',2004,3.0);
 INSERT INTO Book(title,author,genre,publication_year,price)  VALUES('Pa forme eshte qielli','Ismajl Kadare','Poezi',2005,3.7);
 INSERT INTO Book(title,author,genre,publication_year,price)  VALUES('Vepra poetike ne nje vellim','Ismajl Kadare','Poezi',2018,3.9);
+INSERT INTO Book(title,author,genre,publication_year,price)  VALUES('Gjenerali i ushtrise se gjalle','Ismajl Kadare','Poezi',2018,3.9);
 
 
-select * from Book
+
+select * from Book where title like 'Gjenerali'
 
 create table Users(
 	uID integer primary key auto_increment,
@@ -57,3 +59,5 @@ create table Purchases(
     
     
     select * from users
+    select * from book
+    order by bookID desc
