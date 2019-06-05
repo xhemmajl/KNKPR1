@@ -84,6 +84,7 @@ public class Kyqja extends Application{
 		Stage mainStage = new Stage();
 		btnKyqu.setOnAction(e->{
 			if(kyqu()) {
+				UserInfo.USERNAME=tfPerdoruesi.getText();
 				main.start(mainStage);
 				primaryStage.close();
 			}

@@ -57,7 +57,19 @@ create table Purchases(
     purchase_date date,
     foreign key(bookID) references Book(bookID) on delete cascade);
     
+drop table User_Book
+create table User_Book(
+	uID int,
+    bookID int,
+    foreign key(uID) references Users(uID) on delete cascade,
+    foreign key(bookID) references Book(bookID) on delete cascade
+    );
     
-    select * from users
-    select * from book
-    order by bookID desc
+    
+select * from users;
+select * from book
+order by bookID desc
+
+select * from user_book
+
+SELECT bookID FROM book where bookID = (SELECT MAX(bookID) from book);

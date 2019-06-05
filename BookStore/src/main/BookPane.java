@@ -1,11 +1,18 @@
 package main;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Optional;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -19,12 +26,13 @@ public class BookPane extends FlowPane{
 	Label lblPublicationYear = new Label(String.valueOf("")); 
 	Label lblPrice= new Label("");
 	Button btnBlej = new Button("Blej");
-	
+	int bookID;
 	
 	Font lblFont = Font.font("monospace",20);
 	
 	
 	public BookPane(int bookId,String title,String author,String genre, int publicationYear,double price) {
+		this.bookID=bookId;
 		setOrientation(Orientation.VERTICAL);
 		setAlignment(Pos.CENTER);
 		setPadding(new Insets(10,10,0,10));
@@ -67,6 +75,47 @@ public class BookPane extends FlowPane{
 				"    -fx-font-weight: bold;\r\n" + 
 				"    -fx-font-size: 14px;\r\n" + 
 				"    -fx-padding: 10 20 10 20;");
+		
+		btnBlej.setOnAction(e->{
+			String query1 = "DELETE FROM Book WHERE bookID = ?";
+			try {
+				PreparedStatement preparedStm = DatabaseConnection.getConnection().prepareStatement(query1);
+				preparedStm.setInt(1, bookId);
+				
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Konfirmim");
+				alert.setHeaderText("A jeni te sigurte qe doni ta bleni kete liber?");
+				alert.setContentText("Libri do te vije tek adresa te cilen e keni dhene kur jeni regjistruar, 5 dite pas porosise.\n"
+						+ "Pagesa behet me rastin e pranimit te librit.\n");
+				
+				Optional<ButtonType> alertResult = alert.showAndWait();
+				if(alertResult.get()== ButtonType.OK) {
+					preparedStm.executeUpdate();
+					Alert infoAlert = new Alert(AlertType.INFORMATION);
+					infoAlert.setTitle("INFO DIALOG");
+					infoAlert.setHeaderText("Porosia u krye me sukses.\n"
+							+ "Faleminderit qe zgjodhet BookStore!");
+					infoAlert.showAndWait();
+
+				}
+				else
+					alert.close();
+				Main.hbBooks.getChildren().clear();
+				Main.getBooks();
+				Main.hbBooks.getChildren().add(Main.sellPane);					
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText("Cannot insert student in database!");
+				alert.setContentText(e1.getMessage());
+				alert.showAndWait();
+				System.exit(1);
+			}
+			
+			
+		});
 
 		lblTitle.setFont(lblFont);
 		
@@ -99,6 +148,9 @@ public class BookPane extends FlowPane{
 		vitilb.setStyle("-fx-text-fill:#350303;");
 		cmimilb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
 		cmimilb.setStyle("-fx-text-fill:#350303;");
+		
+		lblPrice.setText(lblPrice.getText()+"€");
+		
 		gPane.addRow(0,authorlb,lblAuthor);
 		gPane.addRow(1,kategorilb,lblGenre);
 		gPane.addRow(2, vitilb,lblPublicationYear);	

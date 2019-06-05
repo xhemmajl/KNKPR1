@@ -1,5 +1,8 @@
 package main;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import javafx.application.Application;
@@ -27,10 +30,12 @@ import javafx.stage.Stage;
 
 public class Main extends Application{
 	TextField tfKerko = new TextField();
-
-	
+	public static StackPane sellPane;
+	public static HBox hbBooks;
 	@Override
 	public void start(Stage primaryStage) {
+		User user = new User(UserInfo.USERNAME);
+		
 		VBox vBoxMain = new VBox(20);
 		
 		String btnStyle = "-fx-background-color:rgb(228,0,70);";
@@ -123,13 +128,24 @@ public class Main extends Application{
 		btnShkyqu.setTextFill(Color.WHITE);
 		btnShkyqu.setPrefSize(100, 30);
 		btnShkyqu.setFont(btnFont);
+		
+		btnShkyqu.setOnMouseClicked(e->{
+			UserInfo.USERNAME="";
+			Kyqja kyqja = new Kyqja();
+			try {
+				kyqja.start(primaryStage);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
 		btnShkyqu.setOnMouseEntered(e->{
 			btnShkyqu.setCursor(Cursor.HAND);
 		});
 		
 		HBox hBoxButonat = new HBox(5);
-		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu);
+		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu,new Label(UserInfo.USERNAME+" "+user.getId()));
 		hBoxButonat.setStyle("-fx-background-color:rgb(228,0,70);");
 		
 		HBox hBoxKerko = new HBox();
@@ -210,16 +226,16 @@ public class Main extends Application{
 		vBoxMain.getChildren().add(hbTimeline);
 		
 		// books
-		HBox hbBooks = new HBox(15);
+		hbBooks = new HBox(15);
+		getBooks();
+//		List<Book> books = Book.getBooks();
+//		BookPane[] bookPane = new BookPane[5];
+//		for(int i=0;i<5;i++) {
+//			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+//			hbBooks.getChildren().add(bookPane[i]);
+//		}
 		
-		List<Book> books = Book.getBooks();
-		BookPane[] bookPane = new BookPane[5];
-		for(int i=0;i<5;i++) {
-			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
-			hbBooks.getChildren().add(bookPane[i]);
-		}
-		
-		StackPane sellPane = new StackPane();
+		sellPane = new StackPane();
 		sellPane.setStyle("-fx-background-color:white;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 		
 		
@@ -274,12 +290,26 @@ public class Main extends Application{
 			btnSell1.setCursor(Cursor.HAND);
 			btnSell1.setOnAction(e1->{
 				if(Book.insertBook(tfSellTitulli.getText(), tfSellAutori.getText(), tfSellKategoria.getText(), tfSellViti.getText(), Double.parseDouble(tfSellCmimi.getText()))) {
+					String bookIdQuery = "SELECT bookID FROM book where bookID = (SELECT MAX(bookID) from book);";
+					int bookId=0;
+					try {
+					Statement bookIdStm = DatabaseConnection.getConnection().createStatement();
+					ResultSet resultId = bookIdStm.executeQuery(bookIdQuery);
+					if(resultId.next())
+						bookId=resultId.getInt("bookID");
+					}
+					catch(SQLException ex) {
+						ex.printStackTrace();
+					}
+					Book.insertIntoUser_Book(user.getId(), bookId);
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setHeaderText("Publikimi perfundoi me sukses!");
 					alert.setContentText("Libri juaj eshte ne shitje!");
 					alert.showAndWait();
 					sellStage.close();
-					primaryStage.show();
+					hbBooks.getChildren().clear();
+					getBooks();
+					hbBooks.getChildren().add(sellPane);					
 				}
 				else {
 					Alert alert = new Alert(AlertType.ERROR);
@@ -319,6 +349,15 @@ public class Main extends Application{
 		//primaryStage.setMaximized(true);
 		primaryStage.setResizable(false);
 		primaryStage.show();
+	}
+	
+	public static void getBooks() {
+		List<Book> books = Book.getBooks();
+		BookPane[] bookPane = new BookPane[5];
+		for(int i=0;i<5;i++) {
+			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+			hbBooks.getChildren().add(bookPane[i]);
+		}
 	}
 	
 	public static void main(String[] args) {

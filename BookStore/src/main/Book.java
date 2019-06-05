@@ -141,6 +141,19 @@ public class Book{
 		
 		return books;
 	}
+	
+	public static void insertIntoUser_Book(int uId,int bookId) {
+		String query = "INSERT INTO user_book(uID,bookID) VALUES(?,?);";
+		try {
+			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+			preparedStatement.setInt(1, uId);
+			preparedStatement.setInt(2, bookId);
+			preparedStatement.executeUpdate();
+		}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 
 }
