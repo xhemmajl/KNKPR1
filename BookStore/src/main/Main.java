@@ -17,6 +17,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -40,6 +43,21 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		User user = new User(UserInfo.USERNAME);
+		
+        Menu helpMenu = new Menu("Help") ;
+
+        MenuItem aboutHelpItem = new MenuItem("About"); 
+        helpMenu.getItems().add(aboutHelpItem); 
+        
+        aboutHelpItem.setOnAction(e -> {
+        	Help.about();
+        });
+        
+  
+        MenuBar mb = new MenuBar(); 
+  
+        mb.getMenus().addAll(helpMenu); 
+        
 		
 		VBox vBoxMain = new VBox(20);
 		
@@ -256,7 +274,7 @@ public class Main extends Application{
 		
 		hBox1.getChildren().addAll(lblBookstore,hBoxKerko, hBoxButonat);				
 		
-		vBoxMain.getChildren().addAll(hBox1);
+		vBoxMain.getChildren().addAll(mb,hBox1);
 		
 		// Pjesa nen header
 		HBox hbTimeline = new HBox(30);
@@ -450,6 +468,7 @@ public class Main extends Application{
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
 		//primaryStage.setMaximized(true);
+		primaryStage.setTitle("BookStore");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
