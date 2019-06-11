@@ -26,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -52,6 +53,8 @@ public class Main extends Application{
         aboutHelpItem.setOnAction(e -> {
         	Help.about();
         });
+        
+        
         
   
         MenuBar mb = new MenuBar(); 
@@ -84,43 +87,16 @@ public class Main extends Application{
 		
 		btnKerko.setCursor(Cursor.HAND);
 		
+		
+		
 		btnKerko.setOnAction(e->{
-			if(tfKerko.getText().length()>4) {
-			
-			Stage searchStage = new Stage();
-			HBox hbBooksSearched = new HBox(15);
-
-			Scene bookSearchedScene = new Scene(hbBooksSearched);
-			searchStage.setScene(bookSearchedScene);
-			
-			String strBook = tfKerko.getText();
-			String query = "SELECT * FROM Book WHERE title LIKE '%"+strBook+"%'";
-			
-			hbBooksSearched.setPadding(new Insets(15,15,15,15));
-			
-			List<Book> books = Book.getBooks(query);
-			BookPane[] bookPane = new BookPane[books.size()];
-			
-			if(books.isEmpty()) {
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Libri nuk eshte gjetur!");
-				alert.setContentText("Ky liber nuk ekziston!");
-				alert.showAndWait();
-
-			}
-			else {
-			for(int i=0;i<bookPane.length;i++) {
-				bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
-				hbBooksSearched.getChildren().add(bookPane[i]);
-				}
-			searchStage.show();
-
-			}
-
-			}
+			kerko();
 		});
 		
+		tfKerko.setOnKeyPressed(e->{
+			if(e.getCode()==KeyCode.ENTER)
+				kerko();
+		});
 
 		
 	
@@ -479,6 +455,43 @@ public class Main extends Application{
 		for(int i=0;i<5;i++) {
 			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
 			hbBooks.getChildren().add(bookPane[i]);
+		}
+	}
+	
+	public void kerko() {
+		if(tfKerko.getText().length()>4) {
+			
+		Stage searchStage = new Stage();
+		HBox hbBooksSearched = new HBox(15);
+
+		Scene bookSearchedScene = new Scene(hbBooksSearched);
+		searchStage.setScene(bookSearchedScene);
+		
+		String strBook = tfKerko.getText();
+		String query = "SELECT * FROM Book WHERE title LIKE '%"+strBook+"%'";
+		
+		hbBooksSearched.setPadding(new Insets(15,15,15,15));
+		
+		List<Book> books = Book.getBooks(query);
+		BookPane[] bookPane = new BookPane[books.size()];
+		
+		if(books.isEmpty()) {
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setHeaderText("Libri nuk eshte gjetur!");
+			alert.setContentText("Ky liber nuk ekziston!");
+			alert.showAndWait();
+
+		}
+		else {
+		for(int i=0;i<bookPane.length;i++) {
+			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+			hbBooksSearched.getChildren().add(bookPane[i]);
+			}
+		searchStage.show();
+
+		}
+
 		}
 	}
 	
