@@ -108,7 +108,7 @@ public class BookPane extends FlowPane{
 				// TODO Auto-generated catch block
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error");
-				alert.setHeaderText("Cannot insert student in database!");
+				alert.setHeaderText("Database Error!");
 				alert.setContentText(e1.getMessage());
 				alert.showAndWait();
 				System.exit(1);

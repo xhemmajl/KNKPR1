@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -15,7 +17,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -58,6 +63,8 @@ public class Main extends Application{
 		btnKerko.setTextFill(Color.WHITE);
 		btnKerko.setPrefSize(100, 35);
 		btnKerko.setFont(btnFont);
+		
+		btnKerko.setCursor(Cursor.HAND);
 		
 		btnKerko.setOnAction(e->{
 			if(tfKerko.getText().length()>4) {
@@ -109,6 +116,54 @@ public class Main extends Application{
 		btnShitjet.setOnMouseEntered(e->{
 			btnShitjet.setCursor(Cursor.HAND);
 		});
+		
+		btnShitjet.setOnAction(e->{
+			Stage shitjetStage = new Stage();
+			
+			TableView tvShitjet = new TableView();
+			tvShitjet.setPadding(new Insets(15,15,15,15));
+			
+			TableColumn<String, Book> column1= new TableColumn<>("Book Id");
+			column1.setCellValueFactory(new PropertyValueFactory("bookID"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column2= new TableColumn<>("Title");
+			column1.setCellValueFactory(new PropertyValueFactory("title"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column3= new TableColumn<>("Author");
+			column1.setCellValueFactory(new PropertyValueFactory("author"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column4= new TableColumn<>("Genre");
+			column1.setCellValueFactory(new PropertyValueFactory("genre"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column5= new TableColumn<>("Publication Year");
+			column1.setCellValueFactory(new PropertyValueFactory("publicationYear"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column6= new TableColumn<>("Price");
+			column1.setCellValueFactory(new PropertyValueFactory("price"));
+			column1.setPrefWidth(60);
+			
+			tvShitjet.getColumns().addAll(column1,column2,column3,column4,column5,column6);
+			
+			String shitjetQuery = "SELECT * FROM Book B WHERE B.bookID IN (SELECT S.bookID FROM Sales S)";
+			List<Book> shitjetBooks = Book.getBooks(shitjetQuery);
+			ObservableList<Book> shitjetBookList = FXCollections.observableArrayList();
+			
+			for(int i =0;i<shitjetBooks.size();i++) {
+				shitjetBookList.add(shitjetBooks.get(i));
+			}
+			
+			tvShitjet.setItems(shitjetBookList);
+			
+			Scene scene = new Scene(tvShitjet);
+			shitjetStage.setTitle("Librat e shitur");
+			shitjetStage.setScene(scene);
+			shitjetStage.show();
+		});
 
 
 		
@@ -120,6 +175,54 @@ public class Main extends Application{
 
 		btnBlerjet.setOnMouseEntered(e->{
 			btnBlerjet.setCursor(Cursor.HAND);
+		});
+		
+		btnBlerjet.setOnAction(e->{
+			Stage blerjetStage = new Stage();
+			
+			TableView tvBlerjet = new TableView();
+			tvBlerjet.setPadding(new Insets(15,15,15,15));
+			
+			TableColumn<String, Book> column1= new TableColumn<>("Book Id");
+			column1.setCellValueFactory(new PropertyValueFactory("bookID"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column2= new TableColumn<>("Title");
+			column1.setCellValueFactory(new PropertyValueFactory("title"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column3= new TableColumn<>("Author");
+			column1.setCellValueFactory(new PropertyValueFactory("author"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column4= new TableColumn<>("Genre");
+			column1.setCellValueFactory(new PropertyValueFactory("genre"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column5= new TableColumn<>("Publication Year");
+			column1.setCellValueFactory(new PropertyValueFactory("publicationYear"));
+			column1.setPrefWidth(60);
+			
+			TableColumn<String, Book> column6= new TableColumn<>("Price");
+			column1.setCellValueFactory(new PropertyValueFactory("price"));
+			column1.setPrefWidth(60);
+			
+			tvBlerjet.getColumns().addAll(column1,column2,column3,column4,column5,column6);
+			
+			String blerjetQuery = "SELECT * FROM Book B WHERE B.bookID IN (SELECT P.bookID FROM Purchases P)";
+			List<Book> blerjetBooks = Book.getBooks(blerjetQuery);
+			ObservableList<Book> blerjetBooksList = FXCollections.observableArrayList();
+			
+			for(int i =0;i<blerjetBooks.size();i++) {
+				blerjetBooksList.add(blerjetBooks.get(i));
+			}
+			
+			tvBlerjet.setItems(blerjetBooksList);
+			
+			Scene scene = new Scene(tvBlerjet);
+			blerjetStage.setTitle("Librat e blere");
+			blerjetStage.setScene(scene);
+			blerjetStage.show();
 		});
 
 		
