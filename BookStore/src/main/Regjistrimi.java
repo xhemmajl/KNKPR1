@@ -265,3 +265,29 @@ languagesCbo.getItems().addAll(allowedLanguage);
 		tgGjinia.selectToggle(null);
 		
 	}
+	public boolean validate() {
+		
+		if(validoEmrin() && validoMbiemrin() && validoEmrinPerdoruesit()
+				&& validoEmailin() && validoFjalekalimin() && validoTelefonin()
+				&& validoAdresen() && validoQytetin() && validoGjinine())
+			return true;
+		else return false;
+		
+	}
+	
+	public boolean validoEmrin() {
+		char[] charEmri = tfEmri.getText().toCharArray();
+		int count = 0;
+		for(int i =0;i<charEmri.length;i++)
+			if(Character.isAlphabetic(charEmri[i])==false)				
+				count++;
+
+		if(count>0 || tfEmri.getText().length()<3) {
+			tfEmri.setStyle("-fx-background-color:red;");
+			return false;
+		}
+		else {
+			tfEmri.setStyle("");
+			return true;
+		}
+	}
