@@ -106,3 +106,21 @@ Label lblEmri = I18N.getLabel("Emri");
 		
 		//Button btnRegjistrohu = new Button("Regjistrohu");
 		Button btnRegjistrohu = I18N.getButton("Regjistrohu");
+
+		btnRegjistrohu.setOnAction(e->{
+			if(validate()) {
+				insertUser();
+				try {
+					kyqja.start(primaryStage);
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnRegjistrohu.setOnKeyReleased(e->{
+			if(e.getCode() == KeyCode.ENTER)
+				if(validate())
+					insertUser();
+		});
