@@ -59,3 +59,24 @@ public class Regjistrimi extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws ClassNotFoundException {
+		GridPane gPane = new GridPane();
+		gPane.setPadding(new Insets(20,50,50,50));
+		gPane.setHgap(30);
+		gPane.setVgap(10);
+		
+
+		Image imgSignup = new Image("images/signup.png");
+		ImageView ivSignup = new ImageView(imgSignup);
+
+		
+//		Label lblEmri = new Label("Emri:");
+//		Label lblMbiemri = new Label("Mbiemri:");
+//		Label lblEmriPerdoruesit = new Label("Emri i perdoruesit:");
+//		Label lblEmailAdresa = new Label("Email Adresa:");
+//		Label lblFjalekalimi = new Label("Fjalekalimi:");
+//		Label lblKonfirmoFjalekalimin = new Label("Konfirmo fjalekalimin:");		
+//		
+//		Label lblGjinia = new Label("Gjinia:");
+//		Label lblTelefoni = new Label("Numri i telefonit:");
+//		Label lblAdresa = new Label("Adresa:");
+//		Label lblQyteti	= new Label("Qyteti:");
