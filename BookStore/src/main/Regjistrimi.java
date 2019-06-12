@@ -239,4 +239,29 @@ languagesCbo.getItems().addAll(allowedLanguage);
 			infoAlert.setHeaderText("Jeni regjistruar me sukses!");
 			infoAlert.showAndWait();
 			clearForm();
+	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setHeaderText("Something went wrong!Cannot insert student in database!");
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			clearForm();
+		}
+		
+	}
 	
+	// CLEAR FORM
+	private void clearForm() {
+		tfEmri.setText("");
+		tfMbiemri.setText("");
+		tfEmriPerdoruesit.setText("");
+		tfEmailAdresa.setText("");
+		tfFjalekalimi.setText("");
+		tfKonfirmoFjalekalimin.setText("");
+		tfTelefoni.setText("");
+		tfAdresa.setText("");
+		tfQyteti.setText("");
+		tgGjinia.selectToggle(null);
+		
+	}
