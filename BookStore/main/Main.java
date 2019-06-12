@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -240,9 +242,11 @@ public class Main extends Application{
 		btnShkyqu.setOnMouseEntered(e->{
 			btnShkyqu.setCursor(Cursor.HAND);
 		});
-		
+		Label lb = new Label(UserInfo.USERNAME);
+		lb.setStyle("-fx-text-fill:black;");
+		lb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
 		HBox hBoxButonat = new HBox(5);
-		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu,new Label(UserInfo.USERNAME+" "+user.getId()));
+		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu,lb);
 		hBoxButonat.setStyle("-fx-background-color:rgb(228,0,70);");
 		
 		HBox hBoxKerko = new HBox();
@@ -271,6 +275,91 @@ public class Main extends Application{
 		Hyperlink hpBook8 = new Hyperlink("Fantazi");
 		
 		hpBook1.setOnAction(e->{
+			Stage poeziStage = new Stage();
+			FlowPane poeziPane = new FlowPane();
+			Scene scene = new Scene(poeziPane);
+			
+			poeziPane.setOrientation(Orientation.HORIZONTAL);
+			
+			String query1 = "SELECT * FROM book WHERE genre = 'Poezi'";
+			List<Book> books = Book.getBooks(query1);
+			BookPane[] bookPane = new BookPane[books.size()];
+			if(books.isEmpty()) {
+								
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur");
+				alert.setContentText("Asnje liber Poezi nuk u gjend");
+				alert.showAndWait();				
+			}
+			else {
+				for(int i=0;i<books.size();i++) {
+					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+					poeziPane.getChildren().add(bookPane[i]);
+				}
+			}
+			
+			poeziStage.setMaximized(true);
+			poeziStage.setScene(scene);
+			poeziStage.show();
+			
+		});
+		
+		hpBook2.setOnAction(e->{
+			Stage poeziStage = new Stage();
+			FlowPane poeziPane = new FlowPane();
+			Scene scene = new Scene(poeziPane);
+			
+			poeziPane.setOrientation(Orientation.HORIZONTAL);
+			
+			String query1 = "SELECT * FROM book WHERE genre = 'Romane'";
+			List<Book> books = Book.getBooks(query1);
+			BookPane[] bookPane = new BookPane[books.size()];
+			if(books.isEmpty()) {
+								
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur");
+				alert.setContentText("Asnje liber Roman nuk u gjend");
+				alert.showAndWait();				
+			}
+			else {
+				for(int i=0;i<books.size();i++) {
+					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+					poeziPane.getChildren().add(bookPane[i]);
+				}
+			}
+			poeziStage.setMaximized(true);
+			poeziStage.setScene(scene);
+			poeziStage.show();
+						
+		});
+		
+		hpBook3.setOnAction(e->{
+			Stage poeziStage = new Stage();
+			FlowPane poeziPane = new FlowPane();
+			Scene scene = new Scene(poeziPane);
+			
+			poeziPane.setOrientation(Orientation.HORIZONTAL);
+			
+			String query1 = "SELECT * FROM book WHERE genre = 'Shkencor'";
+			List<Book> books = Book.getBooks(query1);
+			BookPane[] bookPane = new BookPane[books.size()];
+			if(books.isEmpty()) {
+								
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur");
+				alert.setContentText("Asnje liber Shkencore nuk u gjend");
+				alert.showAndWait();				
+			}
+			else {
+				for(int i=0;i<books.size();i++) {
+					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+					poeziPane.getChildren().add(bookPane[i]);
+				}
+			}
+			
+			poeziStage.setMaximized(true);
+			poeziStage.setScene(scene);
+			poeziStage.show();
 			
 		});
 		
@@ -309,7 +398,10 @@ public class Main extends Application{
 		//	VBox.setMargin(vbKategorite, new Insets(20,20,10,40));
 		
 		// slideshow
+		//Image imgTimeline = new Image("images/timeline.jpg");
+
 		Image imgTimeline = new Image("images/red.jpg");
+
 		ImageView ivTimeline = new ImageView(imgTimeline);
 		ivTimeline.setFitWidth(1000);
 		ivTimeline.setFitHeight(350);
@@ -443,7 +535,6 @@ public class Main extends Application{
 		vBoxMain.setPadding(new Insets(10,15,10,15));
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
-		//primaryStage.setMaximized(true);
 		primaryStage.setTitle("BookStore");
 		primaryStage.setResizable(false);
 		primaryStage.show();
