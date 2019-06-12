@@ -309,7 +309,7 @@ public class Main extends Application{
 		//	VBox.setMargin(vbKategorite, new Insets(20,20,10,40));
 		
 		// slideshow
-		Image imgTimeline = new Image("images/timeline.jpg");
+		Image imgTimeline = new Image("images/red.jpg");
 		ImageView ivTimeline = new ImageView(imgTimeline);
 		ivTimeline.setFitWidth(1000);
 		ivTimeline.setFitHeight(350);
