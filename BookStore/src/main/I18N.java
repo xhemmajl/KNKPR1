@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 
 public class I18N {
@@ -95,5 +97,20 @@ public class I18N {
 		
 		return radioButton;
 	}
+	
+	public static Menu getMenu(String key,Object... args) {
+		Menu menu = new Menu();
+		menu.textProperty().bind(createStringBinding(key, args));
+		
+		return menu;
+	}
+	
+	public static MenuItem getMenuItem(String key,Object... args) {
+		MenuItem menuItem = new MenuItem();
+		menuItem.textProperty().bind(createStringBinding(key, args));
+		
+		return menuItem;
+	}
+	
 	
 }
