@@ -287,17 +287,11 @@ public class Main extends Application{
 		lblZgjedh.setStyle("-fx-text-fill: #d39e17;");
 		
 		vbKategorite.setAlignment(Pos.CENTER);
-<<<<<<< HEAD
 				
 		Image imgTimeline = new Image("images/timeline.jpg");
-=======
-		
-		//  vbKategorite.setSpacing(-15);
-		//	VBox.setMargin(vbKategorite, new Insets(20,20,10,40));
-		
-		// slideshow
+
 		Image imgTimeline = new Image("images/red.jpg");
->>>>>>> 21b2208dbffeecba6031ae583af2109654973e6b
+
 		ImageView ivTimeline = new ImageView(imgTimeline);
 		ivTimeline.setFitWidth(1000);
 		ivTimeline.setFitHeight(350);
@@ -444,7 +438,6 @@ public class Main extends Application{
 		vBoxMain.setPadding(new Insets(10,15,10,15));
 		Scene scene = new Scene(vBoxMain);
 		primaryStage.setScene(scene);
-		//primaryStage.setMaximized(true);
 		primaryStage.setTitle("BookStore");
 		primaryStage.setResizable(false);
 		primaryStage.show();

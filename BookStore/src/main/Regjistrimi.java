@@ -130,16 +130,7 @@ public class Regjistrimi extends Application{
 		HBox hBox = new HBox();
 		hBox.getChildren().addAll(new Label("Jeni te regjistruar?"),hlKyqu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
-		
-		
-//		tfEmri.setOnInputMethodTextChanged(e->{
-//			char keyChar = e.getCode().toString().charAt(0);
-//			if(!Character.isAlphabetic(keyChar)) {
-//				e.consume();
-//				//Toolkit.getDefaultToolkit().beep();
-//			}
-//				
-//		});
+
 		
 		gPane.add(ivSignup, 1,0 );
 		gPane.add(lblEmri, 0, 1);
