@@ -159,3 +159,32 @@ Label lblEmri = I18N.getLabel("Emri");
 		gPane.add(lblTelefoni,0,8);
 		gPane.add(lblAdresa, 0, 9);
 		gPane.add(lblQyteti, 0, 10);
+gPane.add(tfEmri, 1, 1);
+		gPane.add(tfMbiemri, 1, 2);
+		gPane.add(tfEmriPerdoruesit, 1, 3);
+		gPane.add(tfEmailAdresa, 1, 4);
+		gPane.add(tfFjalekalimi,1,5);
+		gPane.add(tfKonfirmoFjalekalimin,1,6);
+		//gPane.add(null, 1, 6);
+		gPane.add(rbMashkull, 1, 7);
+		gPane.add(rbFemer, 1, 7);
+		gPane.add(tfTelefoni,1,8);
+		gPane.add(tfAdresa, 1, 9);
+		gPane.add(tfQyteti, 1, 10);
+		gPane.add(btnRegjistrohu, 1, 11);
+		gPane.add(btnAnulo, 1, 11);
+		gPane.add(hBox, 1, 12);
+		
+		gPane.setHalignment(rbMashkull, HPos.LEFT);
+		gPane.setHalignment(rbFemer, HPos.RIGHT);
+		gPane.setHalignment(btnRegjistrohu, HPos.LEFT);
+		gPane.setHalignment(btnAnulo, HPos.RIGHT);
+		gPane.setHalignment(hlKyqu, HPos.CENTER);
+		gPane.setHalignment(ivSignup, HPos.CENTER);
+		
+		
+		ObservableList<String> allowedLanguage = FXCollections.observableArrayList();
+		
+		for(int i=0;i<I18N.getLanguages().size();i++) {
+			allowedLanguage.add(I18N.getLanguages().get(i).getLanguage());
+		}
