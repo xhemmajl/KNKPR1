@@ -374,3 +374,31 @@ public boolean validoMbiemrin() {
 		}
 		
 	}
+	public boolean validoTelefonin() {
+		char[] charNumri = tfTelefoni.getText().toCharArray();
+		int count = 0;
+		for(int i=0; i<charNumri.length;i++) 
+			if(Character.isAlphabetic(charNumri[i]))
+				count++;
+
+
+		
+		if(count>0 || tfTelefoni.getText().length()<9) {
+			tfTelefoni.setStyle("-fx-background-color: red;");
+			return false;}
+		else {
+			tfTelefoni.setStyle("");
+			return true;
+		}
+	}
+	
+	public boolean validoAdresen() {
+		if(tfAdresa.getText().length()<6) {
+			tfAdresa.setStyle(css);
+			return false;
+		}
+		else {
+			tfAdresa.setStyle("");
+			return true;
+		}
+	}
