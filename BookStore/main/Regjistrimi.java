@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.RenderingHints.Key;
-import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

@@ -16,7 +16,7 @@ public class DatabaseConnection {
 
 	private final static String password = "lirimimeri1999#";
 
-	private final static String password = "malimali";
+
 
 	
 	
