@@ -240,9 +240,11 @@ public class Main extends Application{
 		btnShkyqu.setOnMouseEntered(e->{
 			btnShkyqu.setCursor(Cursor.HAND);
 		});
-		
+		Label lb = new Label(UserInfo.USERNAME);
+		lb.setStyle("-fx-text-fill:black;");
+		lb.setFont(Font.font("Times new Roman",FontWeight.BOLD,20));
 		HBox hBoxButonat = new HBox(5);
-		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu,new Label(UserInfo.USERNAME+" "+user.getId()));
+		hBoxButonat.getChildren().addAll(btnShitjet,btnBlerjet,btnShkyqu,lb);
 		hBoxButonat.setStyle("-fx-background-color:rgb(228,0,70);");
 		
 		HBox hBoxKerko = new HBox();
