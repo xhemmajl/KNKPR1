@@ -188,3 +188,20 @@ gPane.add(tfEmri, 1, 1);
 		for(int i=0;i<I18N.getLanguages().size();i++) {
 			allowedLanguage.add(I18N.getLanguages().get(i).getLanguage());
 		}
+languagesCbo.getItems().addAll(allowedLanguage);
+		languagesCbo.setValue(I18N.getDefaultLocale().getLanguage());
+		languagesCbo.setOnAction(e->switchLanguage());
+		
+		gPane.add(languagesCbo,1,13);
+		gPane.setHalignment(languagesCbo, HPos.RIGHT);
+		
+		
+		
+		Scene scene = new Scene(gPane);
+		primaryStage.setTitle("Regjistrimi");
+		primaryStage.setScene(scene);
+		primaryStage.centerOnScreen();
+		primaryStage.show();
+		
+	}
+	
