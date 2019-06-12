@@ -423,6 +423,24 @@ public class Main extends Application{
 			poeziStage.setScene(scene);
 			
 		});
+		hpBook6.setOnAction(e->{
+			Stage poeziStage = new Stage();
+			FlowPane poeziPane = new FlowPane();
+			Scene scene = new Scene(poeziPane);
+			
+			poeziPane.setOrientation(Orientation.HORIZONTAL);
+			
+			String query1 = "SELECT * FROM book WHERE genre = 'Per Nxenes'";
+			List<Book> books = Book.getBooks(query1);
+			BookPane[] bookPane = new BookPane[books.size()];
+			if(books.isEmpty()) {
+								
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur");
+				alert.setContentText("Asnje liber Per Nxenes nuk u gjend");
+				alert.showAndWait();				
+			}
+
 		
 		
 		
