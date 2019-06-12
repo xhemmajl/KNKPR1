@@ -325,6 +325,9 @@ public class Main extends Application{
 					poeziPane.getChildren().add(bookPane[i]);
 				}
 			}
+			poeziStage.setMaximized(true);
+			poeziStage.setScene(scene);
+			poeziStage.show();
 						
 		});
 		
