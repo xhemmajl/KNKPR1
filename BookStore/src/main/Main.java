@@ -296,11 +296,12 @@ public class Main extends Application{
 					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
 					poeziPane.getChildren().add(bookPane[i]);
 				}
+				poeziStage.show();
+
 			}
 			
 			poeziStage.setMaximized(true);
 			poeziStage.setScene(scene);
-			poeziStage.show();
 			
 		});
 		
@@ -326,10 +327,11 @@ public class Main extends Application{
 					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
 					poeziPane.getChildren().add(bookPane[i]);
 				}
+				poeziStage.show();
+
 			}
 			poeziStage.setMaximized(true);
 			poeziStage.setScene(scene);
-			poeziStage.show();
 						
 		});
 		
@@ -355,11 +357,11 @@ public class Main extends Application{
 					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
 					poeziPane.getChildren().add(bookPane[i]);
 				}
+				poeziStage.show();
 			}
 			
 			poeziStage.setMaximized(true);
 			poeziStage.setScene(scene);
-			poeziStage.show();
 			
 		});
 		
