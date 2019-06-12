@@ -204,4 +204,39 @@ languagesCbo.getItems().addAll(allowedLanguage);
 		primaryStage.show();
 		
 	}
+	// INSERT USER TO DATABASE
+	private void insertUser(){
+		String query = "insert into users(firstName,lastName,gender,username,password,telephone,address,city,email) values (?,?,?,?,?,?,?,?,?)";
+		
+		try {
+			PreparedStatement pStatement = DatabaseConnection.getConnection().prepareStatement(query);
+			
+			String gjinia = null;
+			if(rbMashkull.isSelected())
+				gjinia = "M";
+			else if(rbFemer.isSelected())
+				gjinia = "F";
+			
+			String emri = tfEmri.getText();
+			emri = emri.substring(0,1).toUpperCase() + emri.substring(1);
+			
+			String mbiemri = tfMbiemri.getText();
+			mbiemri = mbiemri.substring(0,1).toUpperCase() + mbiemri.substring(1);
+			
+			pStatement.setString(1, emri);
+			pStatement.setString(2, mbiemri);
+			pStatement.setString(3, gjinia);
+			pStatement.setString(4, tfEmriPerdoruesit.getText());
+			pStatement.setString(5, tfFjalekalimi.getText());
+			pStatement.setString(6, tfTelefoni.getText());
+			pStatement.setString(7, tfAdresa.getText());
+			pStatement.setString(8, tfQyteti.getText());
+			pStatement.setString(9, tfEmailAdresa.getText());
+			
+			pStatement.executeUpdate();
+			Alert infoAlert = new Alert(AlertType.INFORMATION);
+			infoAlert.setTitle("INFO DIALOG");
+			infoAlert.setHeaderText("Jeni regjistruar me sukses!");
+			infoAlert.showAndWait();
+			clearForm();
 	
