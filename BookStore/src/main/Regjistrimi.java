@@ -124,3 +124,38 @@ Label lblEmri = I18N.getLabel("Emri");
 				if(validate())
 					insertUser();
 		});
+		//Button btnAnulo = new Button("Anulo");
+		Button btnAnulo = I18N.getButton("Anulo");
+		btnAnulo.setOnAction(e->clearForm());
+		btnRegjistrohu.setPrefWidth(105);
+		btnAnulo.setPrefWidth(105);
+		
+		//Hyperlink hlKyqu = new Hyperlink("Kyqu");
+		Hyperlink hlKyqu = I18N.getHyperlink("Kyqu");
+		
+		hlKyqu.setOnAction(e->{
+			try {
+				kyqja.start(primaryStage);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+		HBox hBox = new HBox();
+		hBox.getChildren().addAll(I18N.getLabel("JeniTeRegjistruar"),hlKyqu);
+		hBox.setAlignment(Pos.CENTER_LEFT);
+
+		
+		gPane.add(ivSignup, 1,0 );
+		gPane.add(lblEmri, 0, 1);
+		gPane.add(lblMbiemri, 0, 2);
+		gPane.add(lblEmriPerdoruesit, 0, 3);
+		gPane.add(lblEmailAdresa, 0, 4);
+		gPane.add(lblFjalekalimi, 0, 5);
+		gPane.add(lblKonfirmoFjalekalimin, 0, 6);
+		//gPane.add(null, 0, 6);
+		gPane.add(lblGjinia, 0, 7);
+		gPane.add(lblTelefoni,0,8);
+		gPane.add(lblAdresa, 0, 9);
+		gPane.add(lblQyteti, 0, 10);
