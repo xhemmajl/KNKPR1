@@ -291,3 +291,37 @@ languagesCbo.getItems().addAll(allowedLanguage);
 			return true;
 		}
 	}
+public boolean validoMbiemrin() {
+		char[] charMbiemri = tfMbiemri.getText().toCharArray();
+		int count = 0;
+		for(int i =0;i<charMbiemri.length;i++)
+			if(Character.isAlphabetic(charMbiemri[i])==false) 
+				count++;
+		
+		if(count>0 || tfMbiemri.getText().length()<4) {
+			tfMbiemri.setStyle("-fx-background-color:red;");
+			return false;
+		}
+		else {
+			tfMbiemri.setStyle("");
+			return true;
+		}
+	}
+	
+	public boolean validoEmrinPerdoruesit() {
+		String userPattern = "^[a-z0-9_-]{6,20}$";
+		
+		String query = "select username from users where username = ?";
+		try {
+			PreparedStatement preparedStm = DatabaseConnection.getConnection().prepareStatement(query);
+			preparedStm.setString(1, tfEmriPerdoruesit.getText());
+			
+			ResultSet rs = preparedStm.executeQuery();
+			
+			if(rs.next()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information");
+				alert.setHeaderText("Ky emer '"+tfEmriPerdoruesit.getText()+"' eshte i regjistruar!\nJu lutem zgjedhni nje emer tjeter.");
+				alert.showAndWait();
+				return false;
+			}
