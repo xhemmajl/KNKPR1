@@ -325,3 +325,30 @@ public boolean validoMbiemrin() {
 				alert.showAndWait();
 				return false;
 			}
+} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(tfEmriPerdoruesit.getText().matches(userPattern)) {
+			tfEmriPerdoruesit.setStyle("");
+			return true;
+		}
+		else {
+			tfEmriPerdoruesit.setStyle("-fx-background-color:red;");
+			return false;
+		}
+	}
+	
+	public boolean validoEmailin() {
+		String emailPattern = "[a-zA-Z0-9._]{1,20}@[a-zA-Z]{1,10}[.]{1}[a-zA-Z]{2,3}";
+		if(tfEmailAdresa.getText().matches(emailPattern)) {
+			tfEmailAdresa.setStyle("");
+			return true;
+		}
+		else {
+			tfEmailAdresa.setStyle("-fx-background-color: red;");
+			return false;
+		}
+		
+	}
