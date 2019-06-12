@@ -352,3 +352,25 @@ public boolean validoMbiemrin() {
 		}
 		
 	}
+	public boolean validoFjalekalimin() {
+		String fjalekalimi1 = tfFjalekalimi.getText();
+		String fjalekalimi2 = tfKonfirmoFjalekalimin.getText();
+		
+		
+		if(tfFjalekalimi.getText().length()<8) {
+			tfFjalekalimi.setStyle("-fx-background-color: red;");
+			return false;
+		}else if(fjalekalimi1.equals(fjalekalimi2)) {
+			tfFjalekalimi.setStyle("");
+			tfKonfirmoFjalekalimin.setStyle("");
+			return true;
+		} else if(!fjalekalimi1.equals(fjalekalimi2)){
+			tfFjalekalimi.setStyle("-fx-background-color: red;");
+			tfKonfirmoFjalekalimin.setStyle("-fx-background-color: red;");
+			return false;
+		}else {
+			tfFjalekalimi.setStyle("");
+			return true;
+		}
+		
+	}
