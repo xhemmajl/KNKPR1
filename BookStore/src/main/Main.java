@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Locale;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -43,13 +45,16 @@ public class Main extends Application{
 	TextField tfKerko = new TextField();
 	public static StackPane sellPane;
 	public static HBox hbBooks;
+	ComboBox<String> languagesCbo = new ComboBox<>();
+	
 	@Override
 	public void start(Stage primaryStage) {
 		User user = new User(UserInfo.USERNAME);
 		
-        Menu helpMenu = new Menu("Help") ;
-
-        MenuItem aboutHelpItem = new MenuItem("About"); 
+        //Menu helpMenu = new Menu("Help") ;
+        Menu helpMenu = I18N.getMenu("Ndihme");
+        //MenuItem aboutHelpItem = new MenuItem("About");
+        MenuItem aboutHelpItem = I18N.getMenuItem("PerAplikacionin");
         helpMenu.getItems().add(aboutHelpItem); 
         
         aboutHelpItem.setOnAction(e -> {
@@ -81,7 +86,8 @@ public class Main extends Application{
 		tfKerko.setPrefWidth(450);
 		tfKerko.setPrefHeight(35);
 		
-		Button btnKerko = new Button("Kerko");
+		//Button btnKerko = new Button("Kerko");
+		Button btnKerko = I18N.getButton("Kerko");
 		btnKerko.setStyle("-fx-background-color:rgb(51,51,51);");
 		btnKerko.setTextFill(Color.WHITE);
 		btnKerko.setPrefSize(100, 35);
@@ -103,7 +109,8 @@ public class Main extends Application{
 		
 	
 		
-		Button btnShitjet = new Button("Shitjet");
+		//Button btnShitjet = new Button("Shitjet");
+		Button btnShitjet = I18N.getButton("Shitjet");
 		btnShitjet.setStyle(btnStyle);
 		btnShitjet.setTextFill(Color.WHITE);
 		btnShitjet.setPrefSize(100, 30);
@@ -163,7 +170,8 @@ public class Main extends Application{
 
 
 		
-		Button btnBlerjet = new Button("Blerjet");
+		//Button btnBlerjet = new Button("Blerjet");
+		Button btnBlerjet = I18N.getButton("Blerjet");
 		btnBlerjet.setStyle(btnStyle);
 		btnBlerjet.setTextFill(Color.WHITE);
 		btnBlerjet.setPrefSize(100, 30);
@@ -222,7 +230,8 @@ public class Main extends Application{
 		});
 
 		
-		Button btnShkyqu = new Button("Shkyqu");
+		//Button btnShkyqu = new Button("Shkyqu");
+		Button btnShkyqu = I18N.getButton("Shkyqu");
 		btnShkyqu.setStyle(btnStyle);
 		btnShkyqu.setTextFill(Color.WHITE);
 		btnShkyqu.setPrefSize(100, 30);
@@ -252,7 +261,19 @@ public class Main extends Application{
 		HBox hBoxKerko = new HBox();
 		hBoxKerko.getChildren().addAll(tfKerko,btnKerko);
 		
-		hBox1.getChildren().addAll(lblBookstore,hBoxKerko, hBoxButonat);				
+		
+		ObservableList<String> allowedLanguage = FXCollections.observableArrayList();
+		
+		for(int i=0;i<I18N.getLanguages().size();i++) {
+			allowedLanguage.add(I18N.getLanguages().get(i).getLanguage());
+		}
+		
+		
+		languagesCbo.getItems().addAll(allowedLanguage);
+		languagesCbo.setValue(I18N.getDefaultLocale().getLanguage());
+		languagesCbo.setOnAction(e->switchLanguage());
+		
+		hBox1.getChildren().addAll(lblBookstore,hBoxKerko, hBoxButonat,languagesCbo);				
 		
 		vBoxMain.getChildren().addAll(mb,hBox1);
 		
@@ -262,17 +283,26 @@ public class Main extends Application{
 		VBox vbKategorite = new VBox(); //per hiperlinkat
 		vbKategorite.setPadding(new Insets(20,60,20,60));
 		
-		Label lblZgjedh = new Label("Kategorite");
+		//Label lblZgjedh = new Label("Kategorite");
+		Label lblZgjedh = I18N.getLabel("Kategorite");
 		
 		
-		Hyperlink hpBook1 = new Hyperlink("Poezi");
-		Hyperlink hpBook2 = new Hyperlink("Romane");
-		Hyperlink hpBook3 = new Hyperlink("Shkencor");
-		Hyperlink hpBook4 = new Hyperlink("Per Femij");
-		Hyperlink hpBook5 = new Hyperlink("Biografik");
-		Hyperlink hpBook6 = new Hyperlink("Per nxenes");
-		Hyperlink hpBook7 = new Hyperlink("Komedi");
-		Hyperlink hpBook8 = new Hyperlink("Fantazi");
+		//Hyperlink hpBook1 = new Hyperlink("Poezi");
+		Hyperlink hpBook1 = I18N.getHyperlink("Poezi");
+		//Hyperlink hpBook2 = new Hyperlink("Romane");
+		Hyperlink hpBook2 = I18N.getHyperlink("Romane");
+		//Hyperlink hpBook3 = new Hyperlink("Shkencor");
+		Hyperlink hpBook3 = I18N.getHyperlink("Shkencor");
+		//Hyperlink hpBook4 = new Hyperlink("Per Femij");
+		Hyperlink hpBook4 = I18N.getHyperlink("PerFemije");
+		//Hyperlink hpBook5 = new Hyperlink("Biografik");
+		Hyperlink hpBook5 = I18N.getHyperlink("Biografik");
+		//Hyperlink hpBook6 = new Hyperlink("Per nxenes");
+		Hyperlink hpBook6 = I18N.getHyperlink("PerNxenes");
+		//Hyperlink hpBook7 = new Hyperlink("Komedi");
+		Hyperlink hpBook7 = I18N.getHyperlink("Komedi");
+		//Hyperlink hpBook8 = new Hyperlink("Fantazi");
+		Hyperlink hpBook8 = I18N.getHyperlink("Fantazi");
 		
 		hpBook1.setOnAction(e->{
 			Stage poeziStage = new Stage();
@@ -740,6 +770,11 @@ public class Main extends Application{
 
 		}
 	}
+	
+	public void switchLanguage() {
+		I18N.setLocale(new Locale(languagesCbo.getValue()));
+	}
+	
 	
 	public static void main(String[] args) {
 		Application.launch(args);
