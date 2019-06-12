@@ -80,3 +80,29 @@ public class Regjistrimi extends Application{
 //		Label lblTelefoni = new Label("Numri i telefonit:");
 //		Label lblAdresa = new Label("Adresa:");
 //		Label lblQyteti	= new Label("Qyteti:");
+Label lblEmri = I18N.getLabel("Emri");				
+		Label lblMbiemri = 	I18N.getLabel("Mbiemri");			
+		Label lblEmriPerdoruesit = 	I18N.getLabel("EmriPerdoruesit");	
+		Label lblEmailAdresa = 	I18N.getLabel("EmailAdresa");		
+		Label lblFjalekalimi = 	I18N.getLabel("Fjalekalimi");		
+		Label lblKonfirmoFjalekalimin = I18N.getLabel("KonfirmoFjalekalimin");
+
+		Label lblGjinia = 	I18N.getLabel("Gjinia");			
+		Label lblTelefoni = I18N.getLabel("Telefoni");			
+		Label lblAdresa = 	I18N.getLabel("Adresa");			
+		Label lblQyteti	= 	I18N.getLabel("Qyteti");			
+		
+		
+		
+		
+		tfEmri.setPrefWidth(220);
+		
+
+
+		rbMashkull.setToggleGroup(tgGjinia);
+		rbFemer.setToggleGroup(tgGjinia);
+		
+
+		
+		//Button btnRegjistrohu = new Button("Regjistrohu");
+		Button btnRegjistrohu = I18N.getButton("Regjistrohu");
