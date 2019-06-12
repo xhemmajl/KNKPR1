@@ -46,16 +46,30 @@ create table Users(
 drop table if exists Sales
 create table Sales(
 	sID int primary key auto_increment,
+    uID int,
     bookID int,
-    upload_date date,
-    foreign key(bookID) references Book(bookID) on delete cascade);
- 
+    sale_date timestamp,
+    foreign key(bookID) references Book(bookID),
+    foreign key(uID) references Users(uID));
+    
+    insert into Sales(userID,bookID,sale_date) VALUES(10,13,now())
+    
+    select * from sales
+    SELECT * FROM Book B WHERE B.bookID IN (SELECT S.bookID FROM Sales S)
+    
+    select *
+    from Book B
+    where B.bookID in (select S.bookID from Sales S)
+    
+    
  drop table if exists Purchases
 create table Purchases(
 	pID int primary key auto_increment,
+    uID int,
     bookID int,
-    purchase_date date,
-    foreign key(bookID) references Book(bookID) on delete cascade);
+    purchase_date timestamp,
+    foreign key(bookID) references Book(bookID) on delete cascade,
+    foreign key(uID) references Users(uID) on delete cascade);
     
 drop table User_Book
 create table User_Book(

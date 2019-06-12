@@ -1,14 +1,13 @@
 package main;
 
-import java.awt.RenderingHints.Key;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
+
 import javafx.application.Application;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,16 +25,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Regjistrimi extends Application{
 	//
+	ComboBox<String> languagesCbo = new ComboBox<>();
+
+	
 	private TextField tfEmri = new TextField();
 	private TextField tfMbiemri = new TextField();
 	private TextField tfEmriPerdoruesit = new TextField();
@@ -45,8 +44,10 @@ public class Regjistrimi extends Application{
 	private TextField tfAdresa = new TextField();
 	private TextField tfQyteti = new TextField();
 	private ToggleGroup tgGjinia = new ToggleGroup();
-	private RadioButton rbMashkull = new RadioButton("Mashkull");
-	private RadioButton rbFemer = new RadioButton("Femer");
+	//private RadioButton rbMashkull = new RadioButton("Mashkull");
+	private RadioButton rbMashkull = I18N.getRadioButton("Mashkull");
+	//private RadioButton rbFemer = new RadioButton("Femer");
+	private RadioButton rbFemer = I18N.getRadioButton("Femer");
 	
 	private static Stage secondStage;
 	private Kyqja kyqja = new Kyqja();
@@ -61,7 +62,7 @@ public class Regjistrimi extends Application{
 		
 		GridPane gPane = new GridPane();
 		gPane.setPadding(new Insets(20,50,50,50));
-		gPane.setHgap(20);
+		gPane.setHgap(30);
 		gPane.setVgap(10);
 		
 
@@ -69,17 +70,30 @@ public class Regjistrimi extends Application{
 		ImageView ivSignup = new ImageView(imgSignup);
 
 		
-		Label lblEmri = new Label("Emri:");
-		Label lblMbiemri = new Label("Mbiemri:");
-		Label lblEmriPerdoruesit = new Label("Emri i perdoruesit:");
-		Label lblEmailAdresa = new Label("Email Adresa:");
-		Label lblFjalekalimi = new Label("Fjalekalimi:");
-		Label lblKonfirmoFjalekalimin = new Label("Konfirmo fjalekalimin:");		
+//		Label lblEmri = new Label("Emri:");
+//		Label lblMbiemri = new Label("Mbiemri:");
+//		Label lblEmriPerdoruesit = new Label("Emri i perdoruesit:");
+//		Label lblEmailAdresa = new Label("Email Adresa:");
+//		Label lblFjalekalimi = new Label("Fjalekalimi:");
+//		Label lblKonfirmoFjalekalimin = new Label("Konfirmo fjalekalimin:");		
+//		
+//		Label lblGjinia = new Label("Gjinia:");
+//		Label lblTelefoni = new Label("Numri i telefonit:");
+//		Label lblAdresa = new Label("Adresa:");
+//		Label lblQyteti	= new Label("Qyteti:");
 		
-		Label lblGjinia = new Label("Gjinia:");
-		Label lblTelefoni = new Label("Numri i telefonit:");
-		Label lblAdresa = new Label("Adresa:");
-		Label lblQyteti	= new Label("Qyteti:");
+		Label lblEmri = I18N.getLabel("Emri");				
+		Label lblMbiemri = 	I18N.getLabel("Mbiemri");			
+		Label lblEmriPerdoruesit = 	I18N.getLabel("EmriPerdoruesit");	
+		Label lblEmailAdresa = 	I18N.getLabel("EmailAdresa");		
+		Label lblFjalekalimi = 	I18N.getLabel("Fjalekalimi");		
+		Label lblKonfirmoFjalekalimin = I18N.getLabel("KonfirmoFjalekalimin");
+
+		Label lblGjinia = 	I18N.getLabel("Gjinia");			
+		Label lblTelefoni = I18N.getLabel("Telefoni");			
+		Label lblAdresa = 	I18N.getLabel("Adresa");			
+		Label lblQyteti	= 	I18N.getLabel("Qyteti");			
+		
 		
 		
 		
@@ -92,7 +106,9 @@ public class Regjistrimi extends Application{
 		
 
 		
-		Button btnRegjistrohu = new Button("Regjistrohu");
+		//Button btnRegjistrohu = new Button("Regjistrohu");
+		Button btnRegjistrohu = I18N.getButton("Regjistrohu");
+		
 		btnRegjistrohu.setOnAction(e->{
 			if(validate()) {
 				insertUser();
@@ -112,12 +128,15 @@ public class Regjistrimi extends Application{
 		});
 		
 		
-		Button btnAnulo = new Button("Anulo");
+		//Button btnAnulo = new Button("Anulo");
+		Button btnAnulo = I18N.getButton("Anulo");
 		btnAnulo.setOnAction(e->clearForm());
 		btnRegjistrohu.setPrefWidth(105);
 		btnAnulo.setPrefWidth(105);
 		
-		Hyperlink hlKyqu = new Hyperlink("Kyqu");
+		//Hyperlink hlKyqu = new Hyperlink("Kyqu");
+		Hyperlink hlKyqu = I18N.getHyperlink("Kyqu");
+		
 		hlKyqu.setOnAction(e->{
 			try {
 				kyqja.start(primaryStage);
@@ -128,7 +147,7 @@ public class Regjistrimi extends Application{
 		});
 		
 		HBox hBox = new HBox();
-		hBox.getChildren().addAll(new Label("Jeni te regjistruar?"),hlKyqu);
+		hBox.getChildren().addAll(I18N.getLabel("JeniTeRegjistruar"),hlKyqu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		
 		
@@ -177,6 +196,21 @@ public class Regjistrimi extends Application{
 		gPane.setHalignment(btnAnulo, HPos.RIGHT);
 		gPane.setHalignment(hlKyqu, HPos.CENTER);
 		gPane.setHalignment(ivSignup, HPos.CENTER);
+		
+		
+		ObservableList<String> allowedLanguage = FXCollections.observableArrayList();
+		
+		for(int i=0;i<I18N.getLanguages().size();i++) {
+			allowedLanguage.add(I18N.getLanguages().get(i).getLanguage());
+		}
+		
+		
+		languagesCbo.getItems().addAll(allowedLanguage);
+		languagesCbo.setValue(I18N.getDefaultLocale().getLanguage());
+		languagesCbo.setOnAction(e->switchLanguage());
+		
+		gPane.add(languagesCbo,1,13);
+		gPane.setHalignment(languagesCbo, HPos.RIGHT);
 		
 		
 		
@@ -417,7 +451,9 @@ public class Regjistrimi extends Application{
 		}
 	}
 	
-	
+	public void switchLanguage() {
+		I18N.setLocale(new Locale(languagesCbo.getValue()));
+	}
 	
 	
 	

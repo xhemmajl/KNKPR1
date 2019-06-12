@@ -3,8 +3,11 @@ package main;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,10 +16,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -29,6 +34,7 @@ public class Kyqja extends Application{
 	
 	private TextField tfPerdoruesi = new TextField();
 	private PasswordField tfFjalekalimi = new PasswordField();
+	ComboBox<String> languagesCbo = new ComboBox<>();
 
 	
 	@Override
@@ -53,7 +59,8 @@ public class Kyqja extends Application{
 		
 
 	
-		Label lblRegjistrohu = new Label("Regjistrohu");
+		//Label lblRegjistrohu = new Label("Regjistrohu");
+		Label lblRegjistrohu = I18N.getLabel("Regjistrohu");
 		Label lblBookstore = new Label("Book Store");
 		lblBookstore.setFont(Font.font("Times New Roman", 30));
 		
@@ -62,14 +69,18 @@ public class Kyqja extends Application{
 		tfFjalekalimi.setPromptText("Fjalekalimi");
 		
 		
-		CheckBox cbRuajFjalekalimin = new CheckBox("Mbaj mend fjalekalimin");
+		//CheckBox cbRuajFjalekalimin = new CheckBox("Mbaj mend fjalekalimin");
+		CheckBox cbRuajFjalekalimin = I18N.getCheckBox("MbajMendFjalekalimin");
 		
-		Button btnKyqu = new Button("Kyqu");
-		Button btnAnulo = new Button("Anulo");
+		//Button btnKyqu = new Button("Kyqu");
+		Button btnKyqu = I18N.getButton("Kyqu");
+		//Button btnAnulo = new Button("Anulo");
+		Button btnAnulo = I18N.getButton("Anulo");
 		btnKyqu.setPrefWidth(145);
 		btnAnulo.setPrefWidth(145);
 		
-		Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
+		//Hyperlink hlRegjistrohu = new Hyperlink("Regjistrohu");
+		Hyperlink hlRegjistrohu = I18N.getHyperlink("Regjistrohu");
 		hlRegjistrohu.setOnAction(e->{
 			Regjistrimi regjistrimi = new Regjistrimi();
 			try {
@@ -92,7 +103,7 @@ public class Kyqja extends Application{
 		btnAnulo.setOnAction(e->anulo());
 		
 		HBox hBox = new HBox();
-		hBox.getChildren().addAll(new Label("Nuk jeni te regjistruar?"),hlRegjistrohu);
+		hBox.getChildren().addAll(I18N.getLabel("NukJeniTeRegjistruar"),hlRegjistrohu);
 		hBox.setAlignment(Pos.CENTER_LEFT);
 		
 		gridPane.add(ivLogo, 1, 0);
@@ -112,14 +123,34 @@ public class Kyqja extends Application{
 		gridPane.setStyle("-fx-background-color:white;");
 		gridPane.setHalignment(ivLogo, HPos.CENTER);
 	//	vbox.setStyle("-fx-background-color:white;");
+		
+		// MULTILANGUAGE
+		ObservableList<String> allowedLanguage = FXCollections.observableArrayList();
+		
+		for(int i=0;i<I18N.getLanguages().size();i++) {
+			allowedLanguage.add(I18N.getLanguages().get(i).getLanguage());
+		}
+		
+		
+		languagesCbo.getItems().addAll(allowedLanguage);
+		languagesCbo.setValue(I18N.getDefaultLocale().getLanguage());
+		languagesCbo.setOnAction(e->switchLanguage());
+		
+		gridPane.add(languagesCbo,1,7);
+		gridPane.setHalignment(languagesCbo, HPos.RIGHT);
 
 		
+		
 		Scene scene = new Scene(gridPane);
-		primaryStage.setTitle("Kyqja");
+		primaryStage.setTitle("Kqyja");
 		primaryStage.setScene(scene);
 		primaryStage.centerOnScreen();
 		primaryStage.show();
 		
+	}
+	
+	public void switchLanguage() {
+		I18N.setLocale(new Locale(languagesCbo.getValue()));
 	}
 	
 	public boolean kyqu() {
