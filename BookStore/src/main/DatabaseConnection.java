@@ -13,7 +13,7 @@ public class DatabaseConnection {
 	private final static String hostname = "localhost";
 	private final static String dbName = "dbbookstore";
 	private final static String username = "root";
-	private final static String password = "045257900";
+	private final static String password = "lirimimeri1999#";
 	
 	
 	public static Connection getConnection() {
