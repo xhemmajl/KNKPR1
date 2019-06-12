@@ -49,11 +49,19 @@ public class Main extends Application{
 
         MenuItem aboutHelpItem = new MenuItem("About"); 
         helpMenu.getItems().add(aboutHelpItem); 
-          
+        
+        aboutHelpItem.setOnAction(e -> {
+        	Help.about();
+        });
+        
+        
+        
+  
         MenuBar mb = new MenuBar(); 
   
         mb.getMenus().addAll(helpMenu); 
         
+		
 		VBox vBoxMain = new VBox(20);
 		
 		String btnStyle = "-fx-background-color:rgb(228,0,70);";
@@ -63,6 +71,7 @@ public class Main extends Application{
 		hBox1.setPadding(new Insets(25,25,25,25));
 		hBox1.setStyle("-fx-background-color:rgb(228,0,70);");
 		
+		
 		Label lblBookstore = new Label("BookStore");
 		lblBookstore.setFont(Font.font("Sans-serif",FontWeight.BOLD,20));
 		lblBookstore.setTextFill(Color.WHITE);
@@ -71,12 +80,15 @@ public class Main extends Application{
 		tfKerko.setPrefHeight(35);
 		
 		Button btnKerko = new Button("Kerko");
-		
 		btnKerko.setStyle("-fx-background-color:rgb(51,51,51);");
 		btnKerko.setTextFill(Color.WHITE);
 		btnKerko.setPrefSize(100, 35);
 		btnKerko.setFont(btnFont);
+		
 		btnKerko.setCursor(Cursor.HAND);
+		
+		
+		
 		btnKerko.setOnAction(e->{
 			kerko();
 		});
@@ -85,6 +97,9 @@ public class Main extends Application{
 			if(e.getCode()==KeyCode.ENTER)
 				kerko();
 		});
+
+		
+	
 		
 		Button btnShitjet = new Button("Shitjet");
 		btnShitjet.setStyle(btnStyle);
@@ -143,6 +158,8 @@ public class Main extends Application{
 			shitjetStage.setScene(scene);
 			shitjetStage.show();
 		});
+
+
 		
 		Button btnBlerjet = new Button("Blerjet");
 		btnBlerjet.setStyle(btnStyle);
@@ -201,6 +218,7 @@ public class Main extends Application{
 			blerjetStage.setScene(scene);
 			blerjetStage.show();
 		});
+
 		
 		Button btnShkyqu = new Button("Shkyqu");
 		btnShkyqu.setStyle(btnStyle);
@@ -242,6 +260,7 @@ public class Main extends Application{
 		
 		Label lblZgjedh = new Label("Kategorite");
 		
+		
 		Hyperlink hpBook1 = new Hyperlink("Poezi");
 		Hyperlink hpBook2 = new Hyperlink("Romane");
 		Hyperlink hpBook3 = new Hyperlink("Shkencor");
@@ -250,12 +269,6 @@ public class Main extends Application{
 		Hyperlink hpBook6 = new Hyperlink("Per nxenes");
 		Hyperlink hpBook7 = new Hyperlink("Komedi");
 		Hyperlink hpBook8 = new Hyperlink("Fantazi");
-		
-		TextField tfSellTitulli = new TextField();
-		TextField tfSellAutori = new TextField();
-		TextField tfSellKategoria = new TextField();
-		TextField tfSellViti = new TextField();
-		Stage sellStage = new Stage();
 		
 		hpBook1.setOnAction(e->{
 			
@@ -270,7 +283,8 @@ public class Main extends Application{
 		hpBook6.setFont(Font.font("monospace",17));
 		hpBook7.setFont(Font.font("monospace",17));
 		hpBook8.setFont(Font.font("monospace",17));
-		
+
+				
 		vbKategorite.getChildren().addAll(lblZgjedh,hpBook1,hpBook2,hpBook3,
 				hpBook4,hpBook5,hpBook6,hpBook7,hpBook8);
 		
@@ -285,9 +299,16 @@ public class Main extends Application{
 		hpBook8.setStyle("-fx-text-fill: #f7cfd7;");
 
 		lblZgjedh.setStyle("-fx-text-fill: #d39e17;");
+		//lblZgjedh.setPadding(new Insets(10, 10, 20, 10));
+			
 		
+		//vbKategorite.setMaxWidth(250);
 		vbKategorite.setAlignment(Pos.CENTER);
-				
+		
+		//  vbKategorite.setSpacing(-15);
+		//	VBox.setMargin(vbKategorite, new Insets(20,20,10,40));
+		
+		// slideshow
 		Image imgTimeline = new Image("images/timeline.jpg");
 
 		Image imgTimeline = new Image("images/red.jpg");
@@ -297,21 +318,32 @@ public class Main extends Application{
 		ivTimeline.setFitHeight(350);
 		ivTimeline.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
 		
+		
 		hbTimeline.getChildren().add(vbKategorite);
 		hbTimeline.getChildren().add(ivTimeline);
-				
+		//hbTimeline.setPadding(new Insets(20,20,20,30));
+		
 		vBoxMain.getChildren().add(hbTimeline);
-				
+		
+		// books
 		hbBooks = new HBox(15);
 		getBooks();
+//		List<Book> books = Book.getBooks();
+//		BookPane[] bookPane = new BookPane[5];
+//		for(int i=0;i<5;i++) {
+//			bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+//			hbBooks.getChildren().add(bookPane[i]);
+//		}
 		
 		sellPane = new StackPane();
 		sellPane.setStyle("-fx-background-color:white;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);");
-				
+		
+		
 		ImageView ivPlus = new ImageView(new Image("images/PLUS.png"));
 		ivPlus.setFitHeight(67);
 		ivPlus.setFitWidth(69);
-				
+		
+		
 		Button btnSell = new Button("",ivPlus);
 		btnSell.setStyle("-fx-background-color:white;");
 		
@@ -319,22 +351,29 @@ public class Main extends Application{
 			btnSell.setCursor(Cursor.HAND);
 		});
 		
-		TextField tfSellCmimi = new TextField();
 		btnSell.setOnAction(e->{
-			
+			Stage sellStage = new Stage();
 			
 			GridPane gridSellPane = new GridPane();
 			gridSellPane.setPadding(new Insets(15,15,15,15));
 			gridSellPane.setVgap(5);
 			gridSellPane.setHgap(10);
 			gridSellPane.setStyle("-fx-background-color: linear-gradient(to top left, #FAE3E3, #ef473a);-fx-effect: dropshadow(three-pass-box, rgba(0,0,10,0.8), 10, 0, 0, 0);");
+
+			
 			
 			Label lblSellTitulli = new Label("Titulli: ");
 			Label lblSellAutori = new Label("Autori: ");
 			Label lblSellKategoria = new Label("Kategoria: ");
 			Label lblSellViti = new Label("Viti: ");
 			Label lblSellCmimi = new Label("Cmimi: ");
-					
+			
+			TextField tfSellTitulli = new TextField();
+			TextField tfSellAutori = new TextField();
+			TextField tfSellKategoria = new TextField();
+			TextField tfSellViti = new TextField();
+			TextField tfSellCmimi = new TextField();
+			
 			Button btnSell1 = new Button("Publiko librin");
 			btnSell1.setStyle("-fx-background-color: \r\n" + 
 					"        linear-gradient(#ffd65b, #e68400),\r\n" + 
@@ -354,8 +393,8 @@ public class Main extends Application{
 					String bookIdQuery = "SELECT bookID FROM book where bookID = (SELECT MAX(bookID) from book);";
 					int bookId=0;
 					try {
-						Statement bookIdStm = DatabaseConnection.getConnection().createStatement();
-						ResultSet resultId = bookIdStm.executeQuery(bookIdQuery);
+					Statement bookIdStm = DatabaseConnection.getConnection().createStatement();
+					ResultSet resultId = bookIdStm.executeQuery(bookIdQuery);
 					if(resultId.next())
 						bookId=resultId.getInt("bookID");
 					}
@@ -364,7 +403,6 @@ public class Main extends Application{
 					}
 					Book.insertIntoUser_Book(user.getId(), bookId);
 					Alert alert = new Alert(AlertType.INFORMATION);
-
 					alert.setHeaderText("Publikimi perfundoi me sukses!");
 					alert.setContentText("Libri juaj eshte ne shitje!");
 					alert.showAndWait();
@@ -388,51 +426,21 @@ public class Main extends Application{
 			gridSellPane.addRow(4, lblSellCmimi,tfSellCmimi);
 			gridSellPane.add(btnSell1,1,5);
 			
+			
 			Scene sellScene = new Scene(gridSellPane);
 			
 			sellStage.setScene(sellScene);
-			sellStage.show();	
-		});		
-		
-		tfSellCmimi.setOnKeyPressed(w -> {
-			if(w.getCode() == KeyCode.ENTER) {
-				if(Book.insertBook(tfSellTitulli.getText(), tfSellAutori.getText(), tfSellKategoria.getText(), tfSellViti.getText(), Double.parseDouble(tfSellCmimi.getText()))) {
-					String bookIdQuery = "SELECT bookID FROM book where bookID = (SELECT MAX(bookID) from book);";
-					int bookId=0;
-					try {
-						Statement bookIdStm = DatabaseConnection.getConnection().createStatement();
-						ResultSet resultId = bookIdStm.executeQuery(bookIdQuery);
-					if(resultId.next())
-						bookId=resultId.getInt("bookID");
-					}
-					catch(SQLException ex) {
-						ex.printStackTrace();
-					}
-					Book.insertIntoUser_Book(user.getId(), bookId);
-					Alert alert = new Alert(AlertType.INFORMATION);
-
-					alert.setHeaderText("Publikimi perfundoi me sukses!");
-					alert.setContentText("Libri juaj eshte ne shitje!");
-					alert.showAndWait();
-					sellStage.close();
-					hbBooks.getChildren().clear();
-					getBooks();
-					hbBooks.getChildren().add(sellPane);					
-				}
-				else {
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setHeaderText("Publikimi NUK perfundoi me sukses!");
-					alert.setContentText("Libri juaj NUK eshte ne shitje!");
-					alert.showAndWait();
-				}
-			}
+			sellStage.show();
+			
 		});
+		
 		
 		sellPane.getChildren().add(btnSell);
 		sellPane.setPrefWidth(400);
 		
 		hbBooks.getChildren().add(sellPane);
-				
+		
+		
 		vBoxMain.getChildren().add(hbBooks);
 		
 		vBoxMain.setPadding(new Insets(10,15,10,15));
@@ -443,7 +451,6 @@ public class Main extends Application{
 		primaryStage.show();
 	}
 	
-
 	public static void getBooks() {
 		List<Book> books = Book.getBooks();
 		BookPane[] bookPane = new BookPane[5];
