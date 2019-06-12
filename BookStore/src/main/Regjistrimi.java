@@ -402,3 +402,38 @@ public boolean validoMbiemrin() {
 			return true;
 		}
 	}
+	public boolean validoQytetin() {
+		if(tfQyteti.getText().length()<2) {
+			tfQyteti.setStyle(css);
+			return false;
+		}
+		else {
+			tfQyteti.setStyle("");
+			return true;
+		}
+	}
+	
+	public boolean validoGjinine() {
+		if(!rbMashkull.isSelected() && !rbFemer.isSelected()) {
+			rbMashkull.setStyle(css);
+			rbFemer.setStyle(css);
+			return false;
+		}
+		else {
+			rbMashkull.setStyle("");
+			rbFemer.setStyle("");
+			return true;
+		}
+	}
+	
+	public void switchLanguage() {
+		I18N.setLocale(new Locale(languagesCbo.getValue()));
+	}
+	
+	
+	
+	public static void main(String[] args) {
+	Application.launch(args);
+	}
+}
+
