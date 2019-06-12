@@ -394,6 +394,35 @@ public class Main extends Application{
 			poeziStage.setScene(scene);
 			
 		});
+		hpBook5.setOnAction(e->{
+			Stage poeziStage = new Stage();
+			FlowPane poeziPane = new FlowPane();
+			Scene scene = new Scene(poeziPane);
+			
+			poeziPane.setOrientation(Orientation.HORIZONTAL);
+			
+			String query1 = "SELECT * FROM book WHERE genre = 'Biografik'";
+			List<Book> books = Book.getBooks(query1);
+			BookPane[] bookPane = new BookPane[books.size()];
+			if(books.isEmpty()) {
+								
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Libri nuk eshte gjetur");
+				alert.setContentText("Asnje liber Biografik nuk u gjend");
+				alert.showAndWait();				
+			}
+			else {
+				for(int i=0;i<books.size();i++) {
+					bookPane[i] = new BookPane(books.get(i).getBookId(),books.get(i).getTitle(),books.get(i).getAuthor(),books.get(i).getGenre(),books.get(i).getPublicationYear(),books.get(i).getPrice());
+					poeziPane.getChildren().add(bookPane[i]);
+				}
+				poeziStage.show();
+			}
+			
+			poeziStage.setMaximized(true);
+			poeziStage.setScene(scene);
+			
+		});
 		
 		
 		
